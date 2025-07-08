@@ -1,0 +1,65 @@
+<!-- TELA DO COLABORADOR -->
+<div class="min-h-screen flex justify-center bg-gray-100 pb-20">
+    <div class="w-11/12 max-w-5xl bg-white h-min border border-gray-300 shadow rounded mt-10 lg:mt-20 p-5">
+        <h1 class="text-blue-800 text-3xl text-center">Solicitação de Férias Macrosul</h1>
+        <form action="#" method="." class="space-y-3 w-full mt-3">
+            <div class="flex space-x-3 w-full">
+                <div class="w-1/2">
+                    <label for="nome_colaborador" class="block text-sm font-semibold text-blue-900 pl-1">Nome Completo:</label>
+                    <input type="text" id="nome_colaborador" name="nome_colaborador" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+
+                <div class="w-1/2">
+                    <label for="email_colaborador" class="block text-sm font-semibold text-blue-900 pl-1">Email:</label>
+                    <input type="text" id="email_colaborador" name="email_colaborador" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+            </div>
+            
+            <div class="flex space-x-3 w-full">
+                <div class="w-1/2">
+                    <label for="dias_descanso" class="block text-sm font-semibold text-blue-900 pl-1"> Quantidade de dias de descanso:</label>
+                    <input type="number" id="dias_descanso" name="dias_descanso" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+
+                <div class="w-1/2">
+                    <label for="inicio_descanso" class="block text-sm font-semibold text-blue-900 pl-1"> Data de início do descanso:</label>
+                    <input type="date" id="inicio_descanso" name="inicio_descanso" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+            </div>
+
+             <div class="flex space-x-3 w-full">
+                <div class="w-1/2">
+                    <label for="dias_vendidos" class="block text-sm font-semibold text-blue-900 pl-1">Dias que deseja vender das férias:</label>
+                    <input type="number" id="dias_vendidos" name="dias_vendidos" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" default="0" min="0" max="10">
+                </div>
+
+                <div class="w-1/2">
+                    <label for="email_gestor" class="block text-sm font-semibold text-blue-900 pl-1">Email do seu gestor:</label>
+                    <input type="email" id="email_gestor" name="email_gestor" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <div class="pl-1">
+                    <p for="comunicacao_gestor" class="block text-sm font-semibold text-blue-900">Comunicação com seu gestor:</p>
+                    <p class="text-xs text-gray-400">Anexe aqui prints de mensagens ou email que mostre que houve comunicação sobre a solicitação de férias com o seu gestor.</p>
+                </div>
+               
+                <label for="comunicacao_gestor" class="bg-gray-500 rounded text-white font-semibold py-1.5 px-3 hover:cursor-pointer transition duration-200 hover:bg-gray-700"> Escolher ficheiro</label>
+                <input type="file" id="comunicacao_gestor" name="comunicacao_gestor" class="hidden">
+            </div>
+
+            <div>
+                <label for="obs_conversa_gestor" class="block text-sm font-semibold text-blue-900 pl-1">Obersavações da conversa com o gestor:</label>
+                <p class="text-xs pl-1 text-gray-400">Em casos em que a comunicação foi feita pessoalmente, ou em algum outro caso específico, escreva aqui caso haja alguma observação.</p>
+                <textarea name="obs_conversa_gestor" id="obs_conversa_gestor" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-40"></textarea>
+            </div>
+
+            <div class="flex justify-center items-center mt-5">
+                <button type="submit" class="bg-blue-900 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200 hover:cursor-pointer">Enviar Solicitação</button>
+
+            </div>
+        </form>
+    </div>
+
+</div>
