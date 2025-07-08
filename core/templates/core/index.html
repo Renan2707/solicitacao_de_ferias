@@ -1,5 +1,10 @@
 {% extends "partials/base.html" %}
 {% block content %}
-    <h1>Bem-vindo ao sistema de solicitação de férias!</h1>
-    <p>Esta é a página inicial do aplicativo.</p>
+
+<!-- TELA ADMINISTRADOR  -->
+{% include "core/sections/rh.html" %}
+
+<!-- TELA DO COLABORADOR -->
+{% include "core/sections/colaborador.html" %}
+
 {% endblock content %}
