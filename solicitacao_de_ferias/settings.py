@@ -34,8 +34,12 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    #WIDGETS
     'widget_tweaks',
-    'rolepermissions'
+    #ROLE PERMISSIONS
+    'rolepermissions',
+    #Celery
+    'django_celery_beat',
 ]
 
 SITE_ID = 1
@@ -149,3 +153,9 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS',cast=bool)
 EMAIL_PORT = config('EMAIL_PORT') 
 EMAIL_HOST = config('EMAIL_HOST')
+
+# Configuração do broker (usando Redis)
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
