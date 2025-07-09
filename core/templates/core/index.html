@@ -1,10 +1,13 @@
 {% extends "partials/base.html" %}
 {% block content %}
+{% load permission_tags %}
 
+{% if user|has_role:'rh'%}
 <!-- TELA ADMINISTRADOR  -->
 {% include "core/sections/rh.html" %}
-
+{% else %}
 <!-- TELA DO COLABORADOR -->
 {% include "core/sections/colaborador.html" %}
+{% endif %}
 
 {% endblock content %}
