@@ -11,4 +11,4 @@ class CardForm(forms.ModelForm):
 class SolicitacaoDeFeriasForm(forms.ModelForm):
     class Meta:
         model = SolicitacaoDeFerias
-        fields = ['dias_de_descanso', 'dias_vendidos', 'email_gestor', 'email_colaborador', 'nome_colaborador', 'card']
+        fields = ['user','dias_de_descanso', 'dias_vendidos', 'email_gestor', 'inicio_do_descanso', 'observacao_do_gestor', 'comunicacao_com_gestor', 'card','fim_do_descanso', 'solicitacao_aprovada', 'ferias_iniciadas', 'ferias_finalizadas', 'ferias_rejeitadas']

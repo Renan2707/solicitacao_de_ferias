@@ -12,7 +12,7 @@ class CardAdmin(admin.ModelAdmin):
 
 @admin.register(SolicitacaoDeFerias)
 class SolicitacaoDeFeriasAdmin(admin.ModelAdmin):
-    list_display = ('nome_colaborador', 'dias_de_descanso', 'dias_vendidos', 'email_gestor', 'email_colaborador', 'card', 'criado_em')
+    list_display = ('user','dias_de_descanso', 'dias_vendidos', 'email_gestor', 'card', 'criado_em')
     search_fields = ('nome_colaborador', 'email_gestor', 'email_colaborador')
     list_filter = ('card__setor',)
     ordering = ('-criado_em',)
