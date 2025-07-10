@@ -5,7 +5,7 @@ from core.models.card import Card
 
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('setor', 'data_de_admissao', 'data_de_vencimento_de_ferias', 'saldo_de_ferias', 'colaborador', 'criado_em', 'atualizado_em')
+    list_display = ('nome','setor', 'data_de_admissao', 'data_de_vencimento_de_ferias', 'saldo_de_ferias', 'colaborador', 'criado_em', 'atualizado_em')
     search_fields = ('setor', 'colaborador__username')
     list_filter = ('setor',)
     ordering = ('-criado_em',)
