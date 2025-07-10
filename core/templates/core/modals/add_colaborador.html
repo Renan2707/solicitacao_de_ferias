@@ -11,9 +11,10 @@
 </div>
 
 <div x-cloak x-show="modalAddColaborador" class="h-screen w-full z-50 fixed top-0 flex justify-center items-center">
-    <div @click.away="modalAddColaborador = false" class="max-h-[90%] overflow-y-auto bg-white rounded p-4">
+    <div @click.away="modalAddColaborador = false" class="max-h-[90%] overflow-y-auto bg-white rounded p-5">
         <h3 class="text-center font-semibold text-xl">Adicionar Colaborador</h3>
-        <form action="#" method="." class="space-y-3">
+        <form action="{% url 'add_colaborador' %}" method="POST" class="space-y-3">
+            {% csrf_token %}
             <div>
                 <label class="text-sm font-semibold" for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" class="w-full border border-gray-300 rounded p-2" required>
@@ -24,28 +25,36 @@
                 <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded p-2" required>
             </div>
 
-            <div>
-            <label class="text-sm font-semibold" for="setor">Setor:</label>
-               <select name="setor" id="setor" required class="w-full border border-gray-300 rounded p-2">
-                <option value="Marketing">Marketing</option>
-                <option value="Assistência Técnica">Assistência Técnica</option>
-                <option value="Comercial">Comercial</option>
-                <option value="Licitação">Licitação</option>
-               </select>
+            <div class="flex space-x-3">
+                <div class="w-1/2">
+                    <label class="text-sm font-semibold" for="setor">Setor:</label>
+                    <select name="setor" id="setor" required class="w-full border border-gray-300 rounded p-2">
+                        <option value="Marketing">Marketing</option>
+                        <option value="Assistência Técnica">Assistência Técnica</option>
+                        <option value="Comercial">Comercial</option>
+                        <option value="Licitação">Licitação</option>
+                    </select>
+                </div>
+                 <div class="w-1/2">
+                    <label class="text-sm font-semibold" for="saldo_de_ferias">Saldo de Férias:</label>
+                    <input type="number" min="0" id="saldo_de_ferias" name="saldo_de_ferias" class="w-full border border-gray-300 rounded p-2" required>
+                </div>
             </div>
 
             <div class="flex space-x-3">
-                <div>
-                    <label class="text-sm font-semibold" for="admissao">Data de Admissão:</label>
-                    <input type="date" id="admissao" name="admissao" class="w-full border border-gray-300 rounded p-2" required>
+                <div class="w-1/2">
+                    <label class="text-sm font-semibold" for="data_de_admissao">Data de Admissão:</label>
+                    <input type="date" id="data_de_admissao" name="data_de_admissao" class="w-full border border-gray-300 rounded p-2" required>
                 </div>
-                <div>
-                    <label class="text-sm font-semibold" for="saldo">Saldo de Férias:</label>
-                    <input type="number" min="0" id="saldo" name="saldo" class="w-full border border-gray-300 rounded p-2" required>
+
+                 <div>
+                    <label class="text-sm font-semibold" for="data_de_vencimento_de_ferias">Data de Vencimento:</label>
+                    <input type="date" id="data_de_vencimento_de_ferias" name="data_de_vencimento_de_ferias" class="w-full border border-gray-300 rounded p-2" required>
                 </div>
+               
             </div>
 
-            <div class="flex w-full justify-center items-center mt-3">
+            <div class="flex w-full justify-center items-center mt-5">
                 <button class="bg-blue-800 hover:bg-blue-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2">
                     Adicionar
                 </button>
