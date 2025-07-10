@@ -4,11 +4,13 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from rolepermissions.roles import assign_role
 from core.models.card import Card
+from core.models.solicitacao import SolicitacaoDeFerias
 
 @login_required
 def index(request):
     cards = Card.objects.all()
-    return render(request, 'core/index.html', {'cards': cards})
+    solicitacoes = SolicitacaoDeFerias.objects.all()
+    return render(request, 'core/index.html', {'cards': cards, 'solicitacoes': solicitacoes})
 
 def criar_user_rh(request):
     user = User.objects.create_user(
