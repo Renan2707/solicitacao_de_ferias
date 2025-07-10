@@ -3,10 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from rolepermissions.roles import assign_role
+from core.models.card import Card
 
 @login_required
 def index(request):
-    return render(request, 'core/index.html')
+    cards = Card.objects.all()
+    return render(request, 'core/index.html', {'cards': cards})
 
 def criar_user_rh(request):
     user = User.objects.create_user(
