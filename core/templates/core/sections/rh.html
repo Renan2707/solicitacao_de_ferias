@@ -124,6 +124,50 @@
             <h3 class="text-yellow-600 font-semibold">Férias Solicitadas</h3>
         </div>
         <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+            {% for solicitacao in solicitacoes %}
+                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                    <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{solicitacao.user}}</p>
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-briefcase mt-0.5"></i>
+                            <div>
+                                <p>DIAS DE DESCANSO:</p>
+                                <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-forward mt-0.5"></i>
+                            <div>
+                                <p>DIAS PARA VENDA:</p>
+                                <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                            <div>
+                                <p>DATA DE INICIO:</p>
+                                <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                            <div>
+                                <p>FIM DO DESCANSO:</p>
+                                <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </section>
 
@@ -156,3 +200,5 @@
 
 <!-- MODAL PARA ADICIONAR COLABORADOR -->
 {% include 'core/modals/add_colaborador.html' %}
+
+{% include 'core/modals/verifica_solicitacao.html' %}
