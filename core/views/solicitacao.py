@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from core.forms import SolicitacaoDeFeriasForm
 from core.models.card import Card
+from datetime import timedelta
 
 @login_required
 def add_solicitacao(request):
@@ -13,6 +14,7 @@ def add_solicitacao(request):
             solicitacao = form.save(commit=False)
             solicitacao.card = card_usuario
             solicitacao.user = request.user
+            solicitacao.fim_do_descanso = form.cleaned_data['inicio_do_descanso'] + timedelta(days=int(form.cleaned_data['dias_de_descanso']))
             solicitacao.save()
             return render(request, 'core/index.html', {'form': form,'success': True })
         else:
