@@ -125,11 +125,11 @@
         </div>
         <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for solicitacao in solicitacoes %}
-                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                <div x-data="{ modalVerificaSolicitacao:false }" @click="modalVerificaSolicitacao = true" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
                     <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{solicitacao.user}}</p>
                     <div class="text-xs">
                         <div class="flex space-x-1">
-                            <i class="fa-solid fa-briefcase mt-0.5"></i>
+                            <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
                             <div>
                                 <p>DIAS DE DESCANSO:</p>
                                 <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
@@ -139,7 +139,7 @@
 
                     <div class="text-xs">
                         <div class="flex space-x-1">
-                            <i class="fa-solid fa-forward mt-0.5"></i>
+                            <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
                             <div>
                                 <p>DIAS PARA VENDA:</p>
                                 <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
@@ -166,6 +166,7 @@
                             </div>
                         </div>
                     </div>
+                    {% include 'core/modals/verifica_solicitacao.html' %}
                 </div>
             {% endfor %}
         </div>
@@ -201,4 +202,3 @@
 <!-- MODAL PARA ADICIONAR COLABORADOR -->
 {% include 'core/modals/add_colaborador.html' %}
 
-{% include 'core/modals/verifica_solicitacao.html' %}
