@@ -1,29 +1,24 @@
 <!-- TELA DO COLABORADOR -->
+{% if success %}
+<div class="flex py-1 pl-3 bg-gray-100">
+    <div class="bg-green-100 text-green-700">Solicitação enviada com sucesso!</div>
+</div>
+{% endif %}
+
 <div class="min-h-screen flex justify-center bg-gray-100 pb-20">
     <div class="w-11/12 max-w-5xl bg-white h-min border border-gray-300 shadow rounded mt-10 lg:mt-20 p-5">
         <h1 class="text-blue-800 text-3xl text-center">Solicitação de Férias Macrosul</h1>
-        <form action="#" method="." class="space-y-3 w-full mt-3">
+        <form action="{% url 'add_solicitacao' %}" method="POST" enctype="multipart/form-data" class="space-y-3 w-full mt-3">
+            {% csrf_token %}
             <div class="flex space-x-3 w-full">
                 <div class="w-1/2">
-                    <label for="nome_colaborador" class="block text-sm font-semibold text-blue-900 pl-1">Nome Completo:</label>
-                    <input type="text" id="nome_colaborador" name="nome_colaborador" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="dias_de_descanso" class="block text-sm font-semibold text-blue-900 pl-1"> Quantidade de dias de descanso:</label>
+                    <input type="number" id="dias_de_descanso" name="dias_de_descanso" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
 
                 <div class="w-1/2">
-                    <label for="email_colaborador" class="block text-sm font-semibold text-blue-900 pl-1">Email:</label>
-                    <input type="text" id="email_colaborador" name="email_colaborador" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                </div>
-            </div>
-            
-            <div class="flex space-x-3 w-full">
-                <div class="w-1/2">
-                    <label for="dias_descanso" class="block text-sm font-semibold text-blue-900 pl-1"> Quantidade de dias de descanso:</label>
-                    <input type="number" id="dias_descanso" name="dias_descanso" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                </div>
-
-                <div class="w-1/2">
-                    <label for="inicio_descanso" class="block text-sm font-semibold text-blue-900 pl-1"> Data de início do descanso:</label>
-                    <input type="date" id="inicio_descanso" name="inicio_descanso" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="inicio_do_descanso" class="block text-sm font-semibold text-blue-900 pl-1"> Data de início do descanso:</label>
+                    <input type="date" id="inicio_do_descanso" name="inicio_do_descanso" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
             </div>
 
@@ -41,23 +36,32 @@
 
             <div class="space-y-3">
                 <div class="pl-1">
-                    <p for="comunicacao_gestor" class="block text-sm font-semibold text-blue-900">Comunicação com seu gestor:</p>
+                    <p class="block text-sm font-semibold text-blue-900">Comunicação com seu gestor:</p>
                     <p class="text-xs text-gray-400">Anexe aqui prints de mensagens ou email que mostre que houve comunicação sobre a solicitação de férias com o seu gestor.</p>
                 </div>
                
-                <label for="comunicacao_gestor" class="bg-gray-500 rounded text-white font-semibold py-1.5 px-3 hover:cursor-pointer transition duration-200 hover:bg-gray-700"> Escolher ficheiro</label>
-                <input type="file" id="comunicacao_gestor" name="comunicacao_gestor" class="hidden">
+                <label for="comunicacao_com_gestor" class="bg-gray-500 rounded text-white font-semibold py-1.5 px-3 hover:cursor-pointer transition duration-200 hover:bg-gray-700"> Escolher ficheiro</label>
+                <input type="file" id="comunicacao_com_gestor" name="comunicacao_com_gestor" class="hidden">
             </div>
 
             <div>
-                <label for="obs_conversa_gestor" class="block text-sm font-semibold text-blue-900 pl-1">Obersavações da conversa com o gestor:</label>
+                <label for="observacao_do_gestor" class="block text-sm font-semibold text-blue-900 pl-1">Obersavações da conversa com o gestor:</label>
                 <p class="text-xs pl-1 text-gray-400">Em casos em que a comunicação foi feita pessoalmente, ou em algum outro caso específico, escreva aqui caso haja alguma observação.</p>
-                <textarea name="obs_conversa_gestor" id="obs_conversa_gestor" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-40"></textarea>
+                <textarea name="observacao_do_gestor" id="observacao_do_gestor" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-40"></textarea>
             </div>
+            {% if form_errors %}
+            <div class="bg-red-100 text-red-700 p-3 rounded">
+                <p class="font-semibold">Por favor, corrija os seguintes erros:</p>
+                <ul class="list-disc pl-5">
+                    {% for error in form_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
 
             <div class="flex justify-center items-center mt-5">
                 <button type="submit" class="bg-blue-900 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200 hover:cursor-pointer">Enviar Solicitação</button>
-
             </div>
         </form>
     </div>
