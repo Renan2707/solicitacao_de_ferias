@@ -125,6 +125,7 @@
         </div>
         <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for solicitacao in solicitacoes %}
+                {% if not solicitacao.solicitacao_aprovada and not solicitacao.ferias_iniciadas and not solicitacao.ferias_finalizadas and not solicitacao.ferias_rejeitadas %}
                 <div x-data="{ modalVerificaSolicitacao:false }" @click="modalVerificaSolicitacao = true" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
                     <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{solicitacao.user}}</p>
                     <div class="text-xs">
@@ -168,6 +169,7 @@
                     </div>
                     {% include 'core/modals/verifica_solicitacao.html' %}
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
     </section>
@@ -177,6 +179,52 @@
             <h3 class="text-green-600 font-semibold">Férias Aprovadas</h3>
         </div>
         <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+            {% for solicitacao in solicitacoes %}
+                {% if solicitacao.solicitacao_aprovada and not solicitacao.ferias_iniciadas %}
+                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                    <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{solicitacao.user}}</p>
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                            <div>
+                                <p>DIAS DE DESCANSO:</p>
+                                <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                            <div>
+                                <p>DIAS PARA VENDA:</p>
+                                <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                            <div>
+                                <p>DATA DE INICIO:</p>
+                                <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                            <div>
+                                <p>FIM DO DESCANSO:</p>
+                                <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </section>
 
@@ -185,6 +233,52 @@
             <h3 class="text-red-600 font-semibold">Férias Recusadas</h3>
         </div>
         <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+            {% for solicitacao in solicitacoes %}
+                {% if solicitacao.ferias_rejeitadas %}
+                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                    <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{solicitacao.user}}</p>
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                            <div>
+                                <p>DIAS DE DESCANSO:</p>
+                                <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                            <div>
+                                <p>DIAS PARA VENDA:</p>
+                                <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                            <div>
+                                <p>DATA DE INICIO:</p>
+                                <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                            <div>
+                                <p>FIM DO DESCANSO:</p>
+                                <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </section>
 
@@ -193,6 +287,52 @@
             <h3 class="text-purple-600 font-semibold">Em Férias</h3>
         </div>
         <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+             {% for solicitacao in solicitacoes %}
+                {% if solicitacao.solicitacao_aprovada and solicitacao.ferias_iniciadas and not solicitacao.ferias_finalizadas %}
+                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                    <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{solicitacao.user}}</p>
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                            <div>
+                                <p>DIAS DE DESCANSO:</p>
+                                <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                            <div>
+                                <p>DIAS PARA VENDA:</p>
+                                <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                            <div>
+                                <p>DATA DE INICIO:</p>
+                                <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs">
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                            <div>
+                                <p>FIM DO DESCANSO:</p>
+                                <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </section>
 </div>
