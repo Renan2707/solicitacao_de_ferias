@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views.cards import add_colaborador, vencimento_proximo
+from core.views.cards import add_colaborador, vencimento_proximo, renova_saldo_de_ferias
 
 from core.views.solicitacao import add_solicitacao, reprovar_solicitacao, aprovar_solicitacao, verificar_fim_das_ferias
 
@@ -10,4 +10,5 @@ urlpatterns = [
    path('reprovar_solicitacao/<str:id_solicitacao>/', reprovar_solicitacao, name='reprovar_solicitacao'),
    path('aprovar_solicitacao/<str:id_solicitacao>/', aprovar_solicitacao, name='aprovar_solicitacao'),
    path('verificar_fim_das_ferias/', verificar_fim_das_ferias, name='verificar_fim_das_ferias'),
+   path('renova_saldo_de_ferias/', renova_saldo_de_ferias, name='renova_saldo_de_ferias'),
 ]

@@ -8,6 +8,7 @@ from datetime import timedelta, datetime
 
 @login_required
 def add_solicitacao(request):
+    #MELHORIA: VERIFICAR SE O USUÁRIO JÁ POSSUI UMA SOLICITAÇÃO PENDENTE, FAZER VERIFICAÇÕES AUTOMATICAS COM RELAÇÃO AO SALDO E DATA 
     card_usuario = Card.objects.get(colaborador=request.user)
     if request.method == 'POST':
         form = SolicitacaoDeFeriasForm(request.POST, request.FILES)
@@ -68,10 +69,12 @@ def verificar_inicio_das_ferias():
 
 
 
-def verificar_fim_das_ferias():
+def verificar_fim_das_ferias(request):
     solicitacoes = SolicitacaoDeFerias.objects.filter(ferias_iniciadas=True)
     for solicitacao in solicitacoes:
         if solicitacao.fim_do_descanso <= datetime.now().date():
             solicitacao.ferias_finalizadas = True
             solicitacao.save()
     return redirect(reverse('index'))    
+
+
