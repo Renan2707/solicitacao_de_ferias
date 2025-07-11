@@ -51,14 +51,14 @@ def aprovar_solicitacao(request, id_solicitacao):
             solicitacao.save()
             solicitacao.card.save()
             #VERIFICANDO SE AS FÉRIAS JÁ PODEM SER INICIADAS
-            verificar_inicio_das_ferias(request)
+            verificar_inicio_das_ferias()
             return redirect(reverse('index'))
         else:
             return render(request, 'core/index.html', {'form': form, 'form_errors': form.errors})
     return redirect(reverse('index'))
 
 
-def verificar_inicio_das_ferias(request):
+def verificar_inicio_das_ferias():
     solicitacoes = SolicitacaoDeFerias.objects.filter(solicitacao_aprovada=True)
     for solicitacao in solicitacoes:
         if solicitacao.inicio_do_descanso <= datetime.now().date() and not solicitacao.ferias_iniciadas:
@@ -68,7 +68,7 @@ def verificar_inicio_das_ferias(request):
 
 
 
-def verificar_fim_das_ferias(request):
+def verificar_fim_das_ferias():
     solicitacoes = SolicitacaoDeFerias.objects.filter(ferias_iniciadas=True)
     for solicitacao in solicitacoes:
         if solicitacao.fim_do_descanso <= datetime.now().date():

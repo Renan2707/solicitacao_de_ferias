@@ -14,5 +14,6 @@ def debug_task(self):
 
 
 @app.task(bind=True)
-def hello(self):
-    print('Hello 2')
+def verificar_o_fim_das_ferias(self):
+    from core.views.solicitacao import verificar_fim_das_ferias
+    verificar_fim_das_ferias()
