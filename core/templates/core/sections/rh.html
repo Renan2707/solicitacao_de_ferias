@@ -18,8 +18,25 @@
         <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for card in cards %}
             {% if not card.data_de_vencimento_proxima %}
-                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
-                    <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{card.colaborador}}</p>
+                <div x-data="{options:false, modalEditColaborador:false, modalRemoveColaborador:false}" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                    <div class="flex items-center space-x-3 relative">
+                        <p class="text-base flex items-center space-x-2 text-black"><i class="fa-solid fa-user mr-2"></i> {{card.colaborador}} 
+                        </p>
+
+                        <button @click="options = true" class="hover:cursor-pointer transition duration-200 hover:bg-gray-200 border size-5 rounded-full flex items-center justify-center text-gray-400">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+
+                        <div x-cloak x-transition x-show="options" @click.away="options = false" class="bg-white border-2 border-gray-300 divide-y divide-gray-300 text-sm rounded shadow-lg w-40 h-20 absolute top-6 right-0">
+                            <div @click="modalEditColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
+                               <i class="fa-solid fa-user-pen text-xs mr-1"></i> Editar Colaborador
+                            </div>
+                             <div  @click="modalRemoveColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
+                                <i class="fa-solid fa-trash text-xs mr-1"></i> Excluir Colaborador
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="text-xs">
                         <div class="flex space-x-1">
                             <i class="fa-solid fa-briefcase mt-0.5"></i>
@@ -59,6 +76,9 @@
                             </div>
                         </div>
                     </div>
+                {% include 'core/modals/edit_colaborador.html' %}
+                {% include 'core/modals/remove_colaborador.html' %}
+
                 </div>
             {% endif %}
             {% endfor %}
@@ -70,10 +90,26 @@
             <h3 class="text-orange-600 font-semibold">Vencimento Próximo</h3>
         </div>
         <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
-             {% for card in cards %}
-             {% if card.data_de_vencimento_proxima %}
-                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
-                    <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{card.colaborador}}</p>
+            {% for card in cards %}
+            {% if card.data_de_vencimento_proxima %}
+               <div x-data="{options:false, modalEditColaborador:false, modalRemoveColaborador:false}" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                    <div class="flex items-center space-x-3 relative">
+                        <p class="text-base flex items-center space-x-2 text-black"><i class="fa-solid fa-user mr-2"></i> {{card.colaborador}} 
+                        </p>
+
+                        <button @click="options = true" class="hover:cursor-pointer transition duration-200 hover:bg-gray-200 border size-5 rounded-full flex items-center justify-center text-gray-400">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+
+                        <div x-cloak x-transition x-show="options" @click.away="options = false" class="bg-white border-2 border-gray-300 divide-y divide-gray-300 text-sm rounded shadow-lg w-40 h-20 absolute top-6 right-0">
+                            <div @click="modalEditColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
+                               <i class="fa-solid fa-user-pen text-xs mr-1"></i> Editar Colaborador
+                            </div>
+                             <div  @click="modalRemoveColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
+                                <i class="fa-solid fa-trash text-xs mr-1"></i> Excluir Colaborador
+                            </div>
+                        </div>
+                    </div>
                     <div class="text-xs">
                         <div class="flex space-x-1">
                             <i class="fa-solid fa-briefcase mt-0.5"></i>
@@ -113,6 +149,11 @@
                             </div>
                         </div>
                     </div>
+                   
+                    {% include 'core/modals/edit_colaborador.html' %}
+                    {% include 'core/modals/remove_colaborador.html' %}
+                   
+               
                 </div>
             {% endif %}
             {% endfor %}
