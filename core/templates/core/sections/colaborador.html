@@ -42,11 +42,14 @@
                
                 <label for="comunicacao_com_gestor" class="bg-gray-500 rounded text-white font-semibold py-1.5 px-3 hover:cursor-pointer transition duration-200 hover:bg-gray-700"> Escolher ficheiro</label>
                 <input type="file" id="comunicacao_com_gestor" name="comunicacao_com_gestor" class="hidden">
+                <div class="py-2">
+                    <p id="anexo" class="text-xs"></p>
+                </div>
             </div>
 
             <div>
                 <label for="observacao_do_gestor" class="block text-sm font-semibold text-blue-900 pl-1">Obersavações da conversa com o gestor:</label>
-                <p class="text-xs pl-1 text-gray-400">Em casos em que a comunicação foi feita pessoalmente, ou em algum outro caso específico, escreva aqui caso haja alguma observação.</p>
+                <p class="text-xs pl-1 pb-1 text-gray-400">Em casos em que a comunicação foi feita pessoalmente, ou em algum outro caso específico, escreva aqui caso haja alguma observação.</p>
                 <textarea name="observacao_do_gestor" id="observacao_do_gestor" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-40"></textarea>
             </div>
             {% if form_errors %}
@@ -65,5 +68,19 @@
             </div>
         </form>
     </div>
-
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("comunicacao_com_gestor");
+    const output = document.getElementById("anexo");
+
+    input.addEventListener("change", function () {
+      if (input.files.length > 0) {
+        output.textContent = input.files[0].name;
+      } else {
+        output.textContent = "";
+      }
+    });
+  });
+</script>
