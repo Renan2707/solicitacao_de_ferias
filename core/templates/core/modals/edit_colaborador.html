@@ -1,0 +1,65 @@
+<div 
+    x-cloak 
+    x-show="modalEditColaborador" 
+    class="fixed inset-0 z-20 h-screen w-full bg-black/70 transition-opacity duration-300"
+    x-transition:enter="ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="ease-in duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0">
+
+
+    <div x-cloak x-show="modalEditColaborador" class="h-screen w-full z-50 fixed top-0 flex justify-center items-center">
+        <div @click.away="modalEditColaborador = false" class="max-h-[90%] overflow-y-auto bg-white rounded p-5">
+            <h3 class="text-center font-semibold text-xl">Editar Colaborador</h3>
+            <form action="{% url 'edit_colaborador' card.pk %}" method="POST" class="space-y-3">
+                {% csrf_token %}
+                <div>
+                    <label class="text-sm font-semibold" for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" class="w-full border border-gray-300 rounded p-2" required value="{{ card.nome }}">
+                </div>
+
+                <div>
+                    <label class="text-sm font-semibold" for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded p-2" required value="{{ card.email }}">
+                </div>
+
+                <div class="flex space-x-3">
+                    <div class="w-1/2">
+                        <label class="text-sm font-semibold" for="setor">Setor:</label>
+                        <select name="setor" id="setor" required class="w-full border border-gray-300 rounded p-2">
+                            <option value="Marketing" {% if card.setor == 'Marketing'%} selected {% endif %}>Marketing</option>
+                            <option value="Assistência Técnica" {% if card.setor == 'Assistência Técnica'%} selected {% endif %}>Assistência Técnica</option>
+                            <option value="Comercial" {% if card.setor == 'Comercial'%} selected {% endif %}>Comercial</option>
+                            <option value="Licitação" {% if card.setor == 'Licitação'%} selected {% endif %}>Licitação</option>
+                        </select>
+                    </div>
+                    <div class="w-1/2">
+                        <label class="text-sm font-semibold" for="saldo_de_ferias">Saldo de Férias:</label>
+                        <input type="number" min="0" id="saldo_de_ferias" name="saldo_de_ferias" class="w-full border border-gray-300 rounded p-2" required value="{{ card.saldo_de_ferias }}">
+                    </div>
+                </div>
+
+                <div class="flex space-x-3">
+                    <div class="w-1/2">
+                        <label class="text-sm font-semibold" for="data_de_admissao">Data de Admissão:</label>
+                        <input type="date" id="data_de_admissao" name="data_de_admissao" class="w-full border border-gray-300 rounded p-2" required value="{{ card.data_de_admissao|date:'Y-m-d' }}">
+                    </div>
+
+                    <div>
+                        <label class="text-sm font-semibold" for="data_de_vencimento_de_ferias">Data de Vencimento:</label>
+                        <input type="date" id="data_de_vencimento_de_ferias" name="data_de_vencimento_de_ferias" class="w-full border border-gray-300 rounded p-2" required value="{{ card.data_de_vencimento_de_ferias|date:'Y-m-d' }}">
+                    </div>
+                
+                </div>
+
+                <div class="flex w-full justify-center items-center mt-5">
+                    <button class="bg-blue-800 hover:bg-blue-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2">
+                        Editar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
