@@ -15,7 +15,7 @@
                 <i class="fa-solid fa-plus text-gray-400 "></i>
             </button>
         </div>
-        <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+        <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for card in cards %}
             {% if not card.data_de_vencimento_proxima %}
                 <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
@@ -69,7 +69,7 @@
         <div class="border border-t-2 border-t-orange-600 border-gray-200 rounded p-2 text-center">
             <h3 class="text-orange-600 font-semibold">Vencimento Próximo</h3>
         </div>
-        <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+        <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
              {% for card in cards %}
              {% if card.data_de_vencimento_proxima %}
                 <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
@@ -123,7 +123,7 @@
         <div class="border border-t-2 border-t-yellow-600 border-gray-200 rounded p-2 text-center">
             <h3 class="text-yellow-600 font-semibold">Férias Solicitadas</h3>
         </div>
-        <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+        <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for solicitacao in solicitacoes %}
                 {% if not solicitacao.solicitacao_aprovada and not solicitacao.ferias_iniciadas and not solicitacao.ferias_finalizadas and not solicitacao.ferias_rejeitadas %}
                 <div x-data="{ modalVerificaSolicitacao:false }" @click="modalVerificaSolicitacao = true" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
@@ -178,7 +178,7 @@
         <div class="border border-t-2 border-t-green-600 border-gray-200 rounded p-2 text-center">
             <h3 class="text-green-600 font-semibold">Férias Aprovadas</h3>
         </div>
-        <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+        <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for solicitacao in solicitacoes %}
                 {% if solicitacao.solicitacao_aprovada and not solicitacao.ferias_iniciadas %}
                 <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
@@ -232,7 +232,7 @@
         <div class="border border-t-2 border-t-red-600 border-gray-200 rounded p-2 text-center">
             <h3 class="text-red-600 font-semibold">Férias Recusadas</h3>
         </div>
-        <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+        <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for solicitacao in solicitacoes %}
                 {% if solicitacao.ferias_rejeitadas %}
                 <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
@@ -286,7 +286,7 @@
         <div class="border border-t-2 border-t-purple-600 border-gray-200 rounded p-2 text-center">
             <h3 class="text-purple-600 font-semibold">Em Férias</h3>
         </div>
-        <div class="h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
+        <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
              {% for solicitacao in solicitacoes %}
                 {% if solicitacao.solicitacao_aprovada and solicitacao.ferias_iniciadas and not solicitacao.ferias_finalizadas %}
                 <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">

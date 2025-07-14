@@ -18,6 +18,38 @@
         [x-cloak] {
           display: none !important;
         }
+
+        .element::-webkit-scrollbar {
+            width: 3px;
+            height: 2px; /* A altura só é vista quando a rolagem é horizontal */
+        }
+
+        .element::-webkit-scrollbar-track {
+            background: rgb(201, 197, 197);
+            padding: 2px;
+        }
+
+        .element::-webkit-scrollbar-thumb {
+            background-color: #6c7072;
+            border-radius: 20px;
+        }
+
+        .elementColor::-webkit-scrollbar {
+            width: 3px;
+            height: 6px; /* A altura só é vista quando a rolagem é horizontal */
+        }
+
+        .elementColor::-webkit-scrollbar-track {
+            background: rgb(201, 197, 197);
+            padding: 2px;
+        }
+
+        .elementColor::-webkit-scrollbar-thumb {
+            background-color: #6c7072;
+            border-radius: 20px;
+        }
+
+
     </style>
 </head>
 <body x-data="data()">
