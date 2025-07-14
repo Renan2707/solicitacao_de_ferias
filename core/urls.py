@@ -1,10 +1,13 @@
 from django.urls import path
-from core.views.cards import add_colaborador, vencimento_proximo, renova_saldo_de_ferias
+from core.views.cards import add_colaborador, vencimento_proximo, renova_saldo_de_ferias, edit_colaborador, remove_colaborador
 
 from core.views.solicitacao import add_solicitacao, reprovar_solicitacao, aprovar_solicitacao, verificar_fim_das_ferias
 
 urlpatterns = [
    path('add_colaborador/', add_colaborador, name='add_colaborador'),
+   path('edit_colaborador/<str:id_colaborador>/', edit_colaborador, name='edit_colaborador'),
+   path('remove_colaborador/<str:id_colaborador>/', remove_colaborador, name='remove_colaborador'),
+
    path('vencimento_proximo/', vencimento_proximo, name='vencimento_proximo'),
    path('add_solicitacao/', add_solicitacao, name='add_solicitacao'),
    path('reprovar_solicitacao/<str:id_solicitacao>/', reprovar_solicitacao, name='reprovar_solicitacao'),

@@ -6,6 +6,7 @@ from core.forms import CardForm
 from core.models.card import Card
 from django.contrib import messages
 from datetime import timedelta, datetime
+from core.models.solicitacao import SolicitacaoDeFerias
 
 @login_required
 def add_colaborador(request):
@@ -31,6 +32,38 @@ def add_colaborador(request):
         form = CardForm()
         return render(request, 'core/index.html', {'form': form,'cards': cards})
     
+
+def edit_colaborador(request, id_colaborador):
+    card = Card.objects.get(pk=id_colaborador)
+    user = card.colaborador
+    if request.method == 'POST':
+        form = CardForm(request.POST, instance=card)
+        if form.is_valid():
+            # Atualiza os dados do usuário
+            user.username = form.cleaned_data['nome']
+            user.email = form.cleaned_data['email']
+            user.save()
+            card.colaborador = user
+            card.save()
+            form.save()
+            messages.success(request, 'Colaborador editado com sucesso!')
+            return redirect(reverse('index'))
+        else:
+            messages.error(request, 'Erro ao editar colaborador. Verifique os dados informados.')
+            return redirect(reverse('index'))
+    
+def remove_colaborador(request, id_colaborador):
+    card = Card.objects.get(pk=id_colaborador)
+    solicitacoes = SolicitacaoDeFerias.objects.filter(user=card.colaborador)
+    user = card.colaborador
+    if request.method == 'POST':
+        solicitacoes.delete()
+        card.delete()
+        user.delete()
+        messages.success(request, 'Colaborador removido com sucesso!')
+        return redirect(reverse('index'))
+
+
 
 def vencimento_proximo(request):
     #MELHORIA: A DATA DE 'VENCIMENTO PROXIMO' VIRA TRUE 3 MESES ANTES DA DATA DE VENCIMENTO CADASTRADA
