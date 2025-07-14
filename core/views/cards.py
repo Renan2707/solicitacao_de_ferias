@@ -40,7 +40,7 @@ def vencimento_proximo(request):
         data_venc = card.data_de_vencimento_de_ferias
         if isinstance(data_venc, datetime):
             data_venc = data_venc.date()
-        if data_venc <= hoje:
+        if data_venc <= hoje + timedelta(days=90):
             card.data_de_vencimento_proxima = True
         else:
             card.data_de_vencimento_proxima = False
@@ -56,7 +56,7 @@ def renova_saldo_de_ferias(request):
         data_venc = card.data_de_vencimento_de_ferias
         if isinstance(data_venc, datetime):
             data_venc = data_venc.date()
-        if data_venc <= hoje and int(card.saldo_de_ferias) <= 0:
+        if data_venc <= hoje:
             card.saldo_de_ferias = 30
             card.data_de_vencimento_de_ferias = hoje + timedelta(days=365)
         card.data_de_vencimento_proxima = False
