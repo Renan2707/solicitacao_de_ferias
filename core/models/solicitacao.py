@@ -28,4 +28,6 @@ class SolicitacaoDeFerias(models.Model):
     class Meta:
         verbose_name = "Solicitacao De Ferias"
         verbose_name_plural = "Solicitacões De Ferias"
+        ordering = ['-criado_em']  
+     
       
