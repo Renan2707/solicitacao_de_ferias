@@ -27,7 +27,7 @@ def add_solicitacao(request):
 
             # VERIFICA SE TEM SALDO DE FÉRIAS SUFICIENTE
             if int(card_usuario.saldo_de_ferias) < int(solicitacao.dias_de_descanso) + int(solicitacao.dias_vendidos):
-                return render(request, 'core/index.html', {'saldo_de_ferias_insufisciente': True, 'form':form })
+                return render(request, 'core/index.html', {'saldo_de_ferias_insuficiente': True, 'form':form })
             else:
                 solicitacao.save()
                 return render(request, 'core/index.html', {'form': form,'success': True })
