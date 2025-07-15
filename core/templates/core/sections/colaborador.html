@@ -1,10 +1,32 @@
 <!-- TELA DO COLABORADOR -->
 {% if success %}
-<div class="flex py-1 pl-3 bg-gray-100">
-    <div class="bg-green-100 text-green-700">Solicitação enviada com sucesso!</div>
+<div class="min-h-screen flex justify-center bg-gray-100 py-20">
+    <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4">
+        <div class="bg-green-100 text-green-700 text-center">Solicitação enviada com sucesso!</div>
+        <div class="flex items-center justify-center mt-4">
+            <a href="/" class="rounded bg-blue-950 text-white py-1.5 w-24 hover:bg-blue-800 text-center">Voltar</a>
+        </div>
+    </div>
 </div>
-{% endif %}
-
+{% elif ferias_em_aberto %}
+<div class="min-h-screen flex justify-center bg-gray-100 py-20">
+     <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4">
+        <div class="bg-red-100 text-red-700 text-center">Você já possui uma solicitação de férias em aberto!</div>
+         <div class="flex items-center justify-center mt-4">
+            <a href="/" class="rounded bg-blue-950 text-white py-1.5 w-24 hover:bg-blue-800 text-center">Voltar</a>
+        </div>
+    </div>
+</div>
+{% elif saldo_de_ferias_insufisciente %}
+<div class="min-h-screen flex justify-center bg-gray-100 py-20">
+    <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4">
+        <div class="bg-red-100 text-red-700 text-center">Você não possui saldo de férias suficiente!</div>
+        <div class="flex items-center justify-center mt-4">
+            <a href="/" class="rounded bg-blue-950 text-white py-1.5 w-24 hover:bg-blue-800 text-center">Voltar</a>
+        </div>
+    </div>
+</div>
+{% else %}
 <div class="min-h-screen flex justify-center bg-gray-100 pb-20">
     <div class="w-11/12 max-w-5xl bg-white h-min border border-gray-300 shadow rounded mt-10 lg:mt-20 p-5">
         <h1 class="text-blue-800 text-3xl text-center">Solicitação de Férias Macrosul</h1>
@@ -52,12 +74,14 @@
                 <p class="text-xs pl-1 pb-1 text-gray-400">Em casos em que a comunicação foi feita pessoalmente, ou em algum outro caso específico, escreva aqui caso haja alguma observação.</p>
                 <textarea name="observacao_do_gestor" id="observacao_do_gestor" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-40"></textarea>
             </div>
-            {% if form_errors %}
+           {% if form.errors %}
             <div class="bg-red-100 text-red-700 p-3 rounded">
                 <p class="font-semibold">Por favor, corrija os seguintes erros:</p>
                 <ul class="list-disc pl-5">
-                    {% for error in form_errors %}
-                        <li>{{ error }}</li>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
                     {% endfor %}
                 </ul>
             </div>
@@ -69,6 +93,7 @@
         </form>
     </div>
 </div>
+{% endif %}
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
