@@ -8,8 +8,15 @@ from datetime import timedelta, datetime
 
 @login_required
 def add_solicitacao(request):
-    #MELHORIA: VERIFICAR SE O USUÁRIO JÁ POSSUI UMA SOLICITAÇÃO PENDENTE, FAZER VERIFICAÇÕES AUTOMATICAS COM RELAÇÃO AO SALDO E DATA 
     card_usuario = Card.objects.get(colaborador=request.user)
+    solicitacao_em_aberto = SolicitacaoDeFerias.objects.filter(user = request.user, ferias_finalizadas = False, ferias_rejeitadas = False )
+
+
+    #VERIFICA SE TEM SOLICITAÇÃO EM ABERTO
+    if solicitacao_em_aberto:
+        form = SolicitacaoDeFeriasForm() 
+        return render(request, 'core/index.html', {'ferias_em_aberto': True, 'form':form })
+    
     if request.method == 'POST':
         form = SolicitacaoDeFeriasForm(request.POST, request.FILES)
         if form.is_valid():
@@ -17,8 +24,13 @@ def add_solicitacao(request):
             solicitacao.card = card_usuario
             solicitacao.user = request.user
             solicitacao.fim_do_descanso = form.cleaned_data['inicio_do_descanso'] + timedelta(days=int(form.cleaned_data['dias_de_descanso']))
-            solicitacao.save()
-            return render(request, 'core/index.html', {'form': form,'success': True })
+
+            # VERIFICA SE TEM SALDO DE FÉRIAS SUFICIENTE
+            if int(card_usuario.saldo_de_ferias) < int(solicitacao.dias_de_descanso) + int(solicitacao.dias_vendidos):
+                return render(request, 'core/index.html', {'saldo_de_ferias_insufisciente': True, 'form':form })
+            else:
+                solicitacao.save()
+                return render(request, 'core/index.html', {'form': form,'success': True })
         else:
             return render(request, 'core/index.html', {'form': form, 'form_errors': form.errors})
     else:
@@ -51,8 +63,6 @@ def aprovar_solicitacao(request, id_solicitacao):
             #SALVANDO CARD E SOLICITACAO
             solicitacao.save()
             solicitacao.card.save()
-            #VERIFICANDO SE AS FÉRIAS JÁ PODEM SER INICIADAS
-            verificar_inicio_das_ferias()
             return redirect(reverse('index'))
         else:
             return render(request, 'core/index.html', {'form': form, 'form_errors': form.errors})
