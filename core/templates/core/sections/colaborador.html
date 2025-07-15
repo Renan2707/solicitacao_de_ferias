@@ -1,34 +1,47 @@
 <!-- TELA DO COLABORADOR -->
-{% if success %}
-<div class="min-h-screen flex justify-center bg-gray-100 py-20">
-    <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4">
+<div class="min-h-screen justify-center bg-gray-100 lg:pb-44 pb-20 pt-10">
+    {% if success %}
+    <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4 mx-auto">
         <div class="bg-green-100 text-green-700 text-center">Solicitação enviada com sucesso!</div>
         <div class="flex items-center justify-center mt-4">
             <a href="/" class="rounded bg-blue-950 text-white py-1.5 w-24 hover:bg-blue-800 text-center">Voltar</a>
         </div>
     </div>
-</div>
-{% elif ferias_em_aberto %}
-<div class="min-h-screen flex justify-center bg-gray-100 py-20">
-     <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4">
+   
+    {% elif ferias_em_aberto %}
+   
+    <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4 mx-auto">
         <div class="bg-red-100 text-red-700 text-center">Você já possui uma solicitação de férias em aberto!</div>
-         <div class="flex items-center justify-center mt-4">
+        <div class="flex items-center justify-center mt-4">
             <a href="/" class="rounded bg-blue-950 text-white py-1.5 w-24 hover:bg-blue-800 text-center">Voltar</a>
         </div>
     </div>
-</div>
-{% elif saldo_de_ferias_insuficiente %}
-<div class="min-h-screen flex justify-center bg-gray-100 py-20">
-    <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4">
+   
+    {% elif saldo_de_ferias_insuficiente %}
+  
+    <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4 mx-auto">
         <div class="bg-red-100 text-red-700 text-center">Você não possui saldo de férias suficiente!</div>
         <div class="flex items-center justify-center mt-4">
             <a href="/" class="rounded bg-blue-950 text-white py-1.5 w-24 hover:bg-blue-800 text-center">Voltar</a>
         </div>
     </div>
-</div>
-{% else %}
-<div class="min-h-screen flex justify-center bg-gray-100 pb-20">
-    <div class="w-11/12 max-w-5xl bg-white h-min border border-gray-300 shadow rounded mt-10 lg:mt-20 p-5">
+   
+    {% else %}
+
+    <div class="w-11/12 bg-gray-100 space-x-5 max-w-5xl mx-auto flex items-center justify-center">
+        <div @click="tabColaborador = 'solicitar'" class="hover:cursor-pointer w-40 bg-white p-4 flex justify-center border border-b-2 rounded"
+        :class="tabColaborador == 'solicitar'? 'border-b-blue-600 text-blue-800 border-blue-200':'border-b-gray-600 text-gray-800 border-gray-300'">
+            <p class="font-semibold ">Solicitar Férias</p>
+        </div>
+
+        <div @click="tabColaborador = 'historico'" class="hover:cursor-pointer w-40 bg-white p-4 flex justify-center border border-b-2 rounded"
+        :class="tabColaborador == 'historico'? 'border-b-blue-600 text-blue-800 border-blue-200':'border-b-gray-600 text-gray-800 border-gray-300'">
+            <p class="font-semibold">Histórico</p>
+        </div>
+    </div>
+
+    <!-- FORMULÁRIO DE SOLICITAÇÃO DE FÉRIAS  -->
+    <div x-show="tabColaborador == 'solicitar'" class="w-11/12 max-w-5xl mx-auto bg-white h-min border border-gray-300 shadow rounded p-5 mt-5">
         <h1 class="text-blue-800 text-3xl text-center">Solicitação de Férias Macrosul</h1>
         <form action="{% url 'add_solicitacao' %}" method="POST" enctype="multipart/form-data" class="space-y-3 w-full mt-3">
             {% csrf_token %}
@@ -92,8 +105,86 @@
             </div>
         </form>
     </div>
-</div>
+
+
+    <!-- HISTÓRICO DE SOLICITAÇÕES -->
+    <div  x-show="tabColaborador == 'historico'" class="element max-h-200 w-11/12 md:w-105 mx-auto mt-3 border border-gray-300 bg-gray-200 rounded p-2 overflow-y-auto pb-5 space-y-4">
+        {% for solicitacao in solicitacoes %}
+        {% if solicitacao.user == user %}
+            <div x-data="{ modalVerificaSolicitacao:false }" @click="modalVerificaSolicitacao = true" class="w-11/12 md::w-full mx-auto hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{solicitacao.user}}</p>
+                <div class="text-xs">
+                    <div class="flex space-x-1">
+                        <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                        <div>
+                            <p>DIAS DE DESCANSO:</p>
+                            <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-xs">
+                    <div class="flex space-x-1">
+                        <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                        <div>
+                            <p>DIAS PARA VENDA:</p>
+                            <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-xs">
+                    <div class="flex space-x-1">
+                        <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                        <div>
+                            <p>DATA DE INICIO:</p>
+                            <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-xs">
+                    <div class="flex space-x-1">
+                        <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                        <div>
+                            <p>FIM DO DESCANSO:</p>
+                            <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-xs">
+                    <div class="flex space-x-1">
+                        <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                        <div>
+                            <p>STATUS:</p>
+
+                            {% if solicitacao.ferias_rejeitadas %}
+                            <p class="text-red-500">Solicitação Recusada</p>
+
+                            {% elif solicitacao.solicitacao_aprovada %}
+                            <p class="text-green-500">Solicitação Aprovada</p>
+
+                            {% elif solicitacao.ferias_iniciadas %}
+                            <p class="text-purple-500">Em Férias</p>
+
+                            {% elif solicitacao.ferias_finalizadas %}
+                            <p class="text-orange-500">Férias Finalizadas</p>
+
+                                {% elif not solicitacao.ferias_finalizadas and not solicitacao.ferias_iniciadas and not solicitacao.solicitacao_aprovada and not solicitacao.ferias_rejeitadas %}
+                            <p class="text-yellow-500">Solicitação em Aberto</p>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+       
+    </div>
 {% endif %}
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
