@@ -69,7 +69,7 @@ def aprovar_solicitacao(request, id_solicitacao):
     return redirect(reverse('index'))
 
 
-def verificar_inicio_das_ferias():
+def verificar_inicio_das_ferias(request):
     solicitacoes = SolicitacaoDeFerias.objects.filter(solicitacao_aprovada=True)
     for solicitacao in solicitacoes:
         if solicitacao.inicio_do_descanso <= datetime.now().date() and not solicitacao.ferias_iniciadas:
