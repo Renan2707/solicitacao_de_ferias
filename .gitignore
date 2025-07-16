@@ -5,8 +5,4 @@ venv/
 **node_modules
 *.json
 *.env
-*.pptx
-*.jpg
-*.png
-*.pdf
-*.xlsx
+**media
