@@ -66,7 +66,7 @@ def remove_colaborador(request, id_colaborador):
 
 
 def vencimento_proximo(request):
-    #MELHORIA: A DATA DE 'VENCIMENTO PROXIMO' VIRA TRUE 3 MESES ANTES DA DATA DE VENCIMENTO CADASTRADA
+    #MELHORIA: A DATA DE 'VENCIMENTO PROXIMO' VIRA TRUE 3 MESES ANTES DA DATA DE VENCIMENTO CADASTRADA E APENAS SE O SALDO DE FÉRIAS ESTIVER MAIOR QUE 0
     cards = Card.objects.all()
     hoje = datetime.now().date()
     for card in cards:
