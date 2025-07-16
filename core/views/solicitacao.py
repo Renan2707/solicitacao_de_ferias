@@ -6,6 +6,8 @@ from core.models.solicitacao import SolicitacaoDeFerias
 from core.models.card import Card
 from datetime import timedelta, datetime
 
+from core.views.emails import email_nova_solicitacao, email_solicitacao_reprovada, email_solicitacao_aprovada
+
 @login_required
 def add_solicitacao(request):
     card_usuario = Card.objects.get(colaborador=request.user)
@@ -30,6 +32,7 @@ def add_solicitacao(request):
                 return render(request, 'core/index.html', {'saldo_de_ferias_insuficiente': True, 'form':form })
             else:
                 solicitacao.save()
+                email_nova_solicitacao(solicitacao)
                 return render(request, 'core/index.html', {'form': form,'success': True })
         else:
             return render(request, 'core/index.html', {'form': form, 'form_errors': form.errors})
@@ -43,6 +46,7 @@ def reprovar_solicitacao(request, id_solicitacao):
     solicitacao = SolicitacaoDeFerias.objects.get(pk=id_solicitacao)
     solicitacao.ferias_rejeitadas = True
     solicitacao.save()
+    email_solicitacao_reprovada(solicitacao)
     return redirect(reverse('index'))
 
 @login_required
@@ -63,6 +67,7 @@ def aprovar_solicitacao(request, id_solicitacao):
             #SALVANDO CARD E SOLICITACAO
             solicitacao.save()
             solicitacao.card.save()
+            email_solicitacao_aprovada(solicitacao)
             return redirect(reverse('index'))
         else:
             return render(request, 'core/index.html', {'form': form, 'form_errors': form.errors})
