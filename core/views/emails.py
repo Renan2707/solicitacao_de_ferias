@@ -100,7 +100,7 @@ def email_colaborador_adicionado(card):
         f'{assinatura_html}'
     )
     send_mail(
-        'Férias Aprovadas',
+        'Conta Criada',
         f'Olá, {card.colaborador}! Informamos que o setor de RH criou sua conta no site www.sitedasferias.com.br, onde serão realizadas as futuras solicitações de férias. Para acessar o sistema pela primeira vez, utilize seu email corporativo da Macrosul e clique na opção "Esqueci minha senha" na tela de login para criar uma nova senha de acesso. A partir de agora, as solicitações de férias deverão ser feitas exclusivamente pelo site, não sendo mais necessário o envio de email ao RH.',
         'sistema@macrosul.com',
         [card.colaborador.email],
