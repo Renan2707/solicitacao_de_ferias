@@ -9,7 +9,7 @@ class SolicitacaoDeFerias(models.Model):
     email_gestor= models.CharField(blank=False, null=False)
     inicio_do_descanso = models.DateField(blank=False, null=True)
     observacao_do_gestor= models.CharField(blank=True, null=True)
-    comunicacao_com_gestor = models.FileField(blank=True, null=True)
+    comunicacao_com_gestor = models.FileField(upload_to='media/',blank=True, null=True)
 
     # CAMPOS PREENCHIDOS AUTOMATICAMENTE OU NAS VERIFICAÇÕES:
     user= models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE,)
