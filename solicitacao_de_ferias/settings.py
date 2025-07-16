@@ -141,6 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 
 ROLEPERMISSIONS_MODULE = 'core.roles'
 
@@ -158,4 +159,6 @@ EMAIL_HOST = config('EMAIL_HOST')
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+
+
 
