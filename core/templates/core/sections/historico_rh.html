@@ -1,0 +1,177 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+
+<div class="bg-gray-100 min-h-screen">
+    <h3 class="text-4xl text-center py-3 text-[#004880]">Histórico de Solicitações</h3>
+    <div class="bg-gray-200 h-full w-5xl rounded mx-auto border border-gray-300 shadow p-5 space-y-3">
+        <div class="p-5 rounded bg-white space-y-3">
+            <!-- FILTROS  -->
+            <form method="POST" action="#" class="flex items-center space-x-2">
+                {% csrf_token %}
+                <p class="font-semibold text-gray-600">Filtros:</p>
+                <div class="relative">
+                    <select id="tipo_filtro" name="tipo_filtro" class="appearance-none px-2 bg-white border border-gray-300 text-gray-700 py-1 rounded leading-tight min-w-40">
+                       <option value="">Selecione</option>
+                       <option value="status">Status</option>
+                       <option value="colaborador">Colaborador</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"><path d="M5.516 7.548L10 12.032l4.484-4.484L16 9.064 10 15.064 4 9.064z"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- FILTROS COLABORADOR  -->
+                 <div id="filtro_colaborador" class="relative hidden">
+                    <select name="filtro_colaborador" class="appearance-none px-2 bg-white border border-gray-300 text-gray-700 py-1  rounded leading-tight min-w-40">
+                        <option value="">Selecione</option>
+                        {% for card in cards %}
+                        <option value="{{card.colaborador}}">{{card.colaborador}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"><path d="M5.516 7.548L10 12.032l4.484-4.484L16 9.064 10 15.064 4 9.064z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- FILTROS DE STATUS  -->
+                <div id="filtro_status" class="relative hidden">
+                    <select name="filtro_status" class="appearance-none px-2 bg-white border border-gray-300 text-gray-700 py-1  rounded leading-tight min-w-40">
+                        <option value="">Selecione</option>
+                        <option value="recusada">Recusada</option>
+                        <option value="em-aberto">Em Aberto</option>
+                        <option value="aprovada">Aprovada</option>
+                        <option value="finalizada">Finalizada</option>
+                        <option value="em-ferias">Em Férias</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"><path d="M5.516 7.548L10 12.032l4.484-4.484L16 9.064 10 15.064 4 9.064z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="rounded bg-blue-800 text-white py-1 px-4 text-center hover:bg-blue-950 transition duration-200 hover:cursor-pointer">Filtrar</button>
+                </div>
+
+                <div id="limparFiltro" class="hidden">
+                    <a href="{% url 'historico_rh' %}"  class="rounded bg-blue-800 py-1.5 text-white px-4 text-center hover:bg-blue-950 transition duration-200 hover:cursor-pointer">Limpar</a>
+                </div>
+
+
+            </form>
+
+
+
+            {% for solicitacao in solicitacoes %}
+                <div class="w-full hover:cursor-pointer rounded border border-gray-300 bg-white shadow hover:shadow-lg p-5 text-sm text-gray-500 font-semibold space-y-3">
+                    <p class="text-base text-black"><i class="fa-solid fa-user"></i> {{solicitacao.user}}</p>
+                    <div class="flex justify-between">
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                                <div>
+                                    <p>DIAS DE DESCANSO:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                                <div>
+                                    <p>DIAS PARA VENDA:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE INICIO:</p>
+                                    <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>FIM DO DESCANSO:</p>
+                                    <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-signal mt-0.5"></i>
+                                <div>
+                                    <p>STATUS:</p>
+
+                                    {% if solicitacao.ferias_rejeitadas %}
+                                    <p class="text-red-500">Solicitação Recusada</p>
+
+                                    {% elif solicitacao.solicitacao_aprovada %}
+                                    <p class="text-green-500">Solicitação Aprovada</p>
+
+                                    {% elif solicitacao.ferias_iniciadas %}
+                                    <p class="text-purple-500">Em Férias</p>
+
+                                    {% elif solicitacao.ferias_finalizadas %}
+                                    <p class="text-orange-500">Férias Finalizadas</p>
+
+                                        {% elif not solicitacao.ferias_finalizadas and not solicitacao.ferias_iniciadas and not solicitacao.solicitacao_aprovada and not solicitacao.ferias_rejeitadas %}
+                                    <p class="text-yellow-500">Solicitação em Aberto</p>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    const filtro_colaborador = document.querySelector('#filtro_colaborador')
+    const filtro_status = document.querySelector('#filtro_status')
+    const tipo_filtro = document.querySelector('#tipo_filtro')
+    const limparFiltro = document.querySelector('#limparFiltro')
+
+    tipo_filtro.addEventListener('change', function(e){
+
+        if(tipo_filtro.value == 'colaborador'){
+            filtro_colaborador.classList.remove('hidden')
+        }else{
+            filtro_colaborador.classList.add('hidden')
+        }
+
+        if(tipo_filtro.value == 'status'){
+            filtro_status.classList.remove('hidden')
+        }else{
+            filtro_status.classList.add('hidden')
+        }
+
+        if(tipo_filtro.value == ""){
+            limparFiltro.classList.add('hidden')
+        }else{
+            limparFiltro.classList.remove('hidden')
+        }
+    })
+</script>
+
+
+{% endblock content %}
