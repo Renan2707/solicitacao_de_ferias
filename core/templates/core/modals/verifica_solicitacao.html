@@ -9,91 +9,108 @@
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0">
 
-    <div x-cloak x-show="modalVerificaSolicitacao" class="h-screen w-full z-50 fixed top-0 flex justify-center items-center">
-        <div @click.away="modalVerificaSolicitacao = false" class="max-h-[90%] overflow-y-auto bg-white rounded p-5 w-11/12 max-w-3xl">
-            <h3 class="text-center mb-5 font-semibold text-xl">Detalhes da Solicitação</h3>
-            <div class="w-full flex">
-                <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
-                    <p class="text-gray-600 font-semibold">Colaborador:</p>
-                    <p class="text-gray-600">{{solicitacao.user}}</p>
+    <div x-cloak x-show="modalVerificaSolicitacao" x-data="{conteudoModalVerificacao:'verificacao'}" class="h-screen w-full z-50 fixed top-0 flex justify-center items-center">
+        <div @click.away="modalVerificaSolicitacao = false, conteudoModalVerificacao = 'verificacao' "  class="max-h-[90%] overflow-y-auto bg-white rounded p-5 w-11/12 max-w-3xl">
+            <div x-show="conteudoModalVerificacao == 'verificacao'">
+                <h3 class="text-center mb-5 font-semibold text-xl">Detalhes da Solicitação</h3>
+                <div class="w-full flex">
+                    <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
+                        <p class="text-gray-600 font-semibold">Colaborador:</p>
+                        <p class="text-gray-600">{{solicitacao.user}}</p>
+                    </div>
+                    <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
+                        <p class="text-gray-600 font-semibold">Saldo de Férias:</p>
+                        <p class="text-gray-600">{{solicitacao.card.saldo_de_ferias}}</p>
+                    </div>
                 </div>
-                <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
-                    <p class="text-gray-600 font-semibold">Saldo de Férias:</p>
-                    <p class="text-gray-600">{{solicitacao.card.saldo_de_ferias}}</p>
+                <div class="w-full flex">
+                    <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
+                        <p class="text-gray-600 font-semibold">Dias de Descanso:</p>
+                        <p class="text-gray-600">{{solicitacao.dias_de_descanso}}</p>
+                    </div>
+                    <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
+                        <p class="text-gray-600 font-semibold">Dias para Venda:</p>
+                        <p class="text-gray-600">{{solicitacao.dias_vendidos}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="w-full flex">
-                <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
-                    <p class="text-gray-600 font-semibold">Dias de Descanso:</p>
-                    <p class="text-gray-600">{{solicitacao.dias_de_descanso}}</p>
+                <div class="w-full flex">
+                    <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
+                        <p class="text-gray-600 font-semibold">Início das Férias:</p>
+                        <p class="text-gray-600">{{solicitacao.inicio_do_descanso|date:'d/m/Y'}}</p>
+                    </div>
+                    <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
+                        <p class="text-gray-600 font-semibold">Fim das Férias:</p>
+                        <p class="text-gray-600">{{solicitacao.fim_do_descanso|date:'d/m/Y'}}</p>
+                    </div>
                 </div>
-                <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
-                    <p class="text-gray-600 font-semibold">Dias para Venda:</p>
-                    <p class="text-gray-600">{{solicitacao.dias_vendidos}}</p>
+                
+                <div class="w-full p-2 border border-gray-200 space-x-3 text-sm">
+                    <p class="text-gray-600 font-semibold">Arquivo de comunicação com gestor:</p>
+                    <p class="text-gray-600">
+                        <a href="{{solicitacao.comunicacao_com_gestor}}" class="text-blue-500 hover:underline">Clique aqui para visualizar</a>
+                        
+                    </p>
                 </div>
-            </div>
-            <div class="w-full flex">
-                <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
-                    <p class="text-gray-600 font-semibold">Início das Férias:</p>
-                    <p class="text-gray-600">{{solicitacao.inicio_do_descanso|date:'d/m/Y'}}</p>
+                <div class="w-full p-2 border border-gray-200 space-x-3 text-sm">
+                    <p class="text-gray-600 font-semibold">Observações da Conversa com o Gestor:</p>
+                    <p class="text-gray-600">{{solicitacao.observacao_do_gestor}}</p>
                 </div>
-                <div class="w-1/2 items-center p-2 border border-gray-200 space-x-3 text-sm">
-                    <p class="text-gray-600 font-semibold">Fim das Férias:</p>
-                    <p class="text-gray-600">{{solicitacao.fim_do_descanso|date:'d/m/Y'}}</p>
-                </div>
-            </div>
+
+                <h3 class="text-xl font-semibold text-center py-3">Verificação da Solicitação</h3>
             
-            <div class="w-full p-2 border border-gray-200 space-x-3 text-sm">
-                <p class="text-gray-600 font-semibold">Arquivo de comunicação com gestor:</p>
-                <p class="text-gray-600">
-                    <a href="{{solicitacao.comunicacao_com_gestor}}" class="text-blue-500 hover:underline">Clique aqui para visualizar</a>
-                    
-                </p>
+                <form action="{% url 'aprovar_solicitacao' solicitacao.pk %}" method="POST" class="space-y-3">
+                    {% csrf_token %}
+                    <div class="flex space-x-2">
+                        <input type="checkbox" required id="saldo_de_ferias_necessario" name="saldo_de_ferias_necessario" class="w-4 h-4 mt-0.5">
+                        <label for="saldo_de_ferias_necessario" class="text-gray-600">O colaborador possui o saldo de férias necessário?</label>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <input type="checkbox" required id="quantidade_de_dias_para_venda" name="quantidade_de_dias_para_venda" class="w-4 h-4 mt-0.5">
+                        <label for="quantidade_de_dias_para_venda" class="text-gray-600">O colaborador pode vender essa quantidade de dias de férias?</label>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <input type="checkbox" required id="data_de_solicitacao_valida" name="data_de_solicitacao_valida" class="w-4 h-4 mt-0.5">
+                        <label for="data_de_solicitacao_valida" class="text-gray-600">O colaborador pode sair de férias no dia solicitado?</label>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <input type="checkbox" required id="comunicou_o_gestor" name="comunicou_o_gestor" class="w-4 h-4 mt-0.5">
+                        <label for="comunicou_o_gestor" class="text-gray-600">O colaborador comunicou o seu gestor?</label>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <input type="checkbox" required id="aprovado_pela_diretoria" name="aprovado_pela_diretoria" class="w-4 h-4 mt-0.5">
+                        <label for="aprovado_pela_diretoria" class="text-gray-600">Essa solicitação foi aprovada pela diretoria?</label>
+                    </div>
+
+                    <div class="flex w-full justify-center items-center mt-8 space-x-5">
+                        <button type="submit" class="bg-green-800 hover:bg-green-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2">
+                            Aprovar Solicitação
+                        </button>
+
+                        <button @click="conteudoModalVerificacao = 'excluir'" type="button" class="bg-red-800 hover:bg-red-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2">
+                            Reprovar Solicitação
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="w-full p-2 border border-gray-200 space-x-3 text-sm">
-                <p class="text-gray-600 font-semibold">Observações da Conversa com o Gestor:</p>
-                <p class="text-gray-600">{{solicitacao.observacao_do_gestor}}</p>
-            </div>
-
-            <h3 class="text-xl font-semibold text-center py-3">Verificação da Solicitação</h3>
-        
-            <form action="{% url 'aprovar_solicitacao' solicitacao.pk %}" method="POST" class="space-y-3">
-                {% csrf_token %}
-                <div class="flex space-x-2">
-                    <input type="checkbox" required id="saldo_de_ferias_necessario" name="saldo_de_ferias_necessario" class="w-4 h-4 mt-0.5">
-                    <label for="saldo_de_ferias_necessario" class="text-gray-600">O colaborador possui o saldo de férias necessário?</label>
-                </div>
-
-                <div class="flex space-x-2">
-                    <input type="checkbox" required id="quantidade_de_dias_para_venda" name="quantidade_de_dias_para_venda" class="w-4 h-4 mt-0.5">
-                    <label for="quantidade_de_dias_para_venda" class="text-gray-600">O colaborador pode vender essa quantidade de dias de férias?</label>
-                </div>
-
-                <div class="flex space-x-2">
-                    <input type="checkbox" required id="data_de_solicitacao_valida" name="data_de_solicitacao_valida" class="w-4 h-4 mt-0.5">
-                    <label for="data_de_solicitacao_valida" class="text-gray-600">O colaborador pode sair de férias no dia solicitado?</label>
-                </div>
-
-                <div class="flex space-x-2">
-                    <input type="checkbox" required id="comunicou_o_gestor" name="comunicou_o_gestor" class="w-4 h-4 mt-0.5">
-                    <label for="comunicou_o_gestor" class="text-gray-600">O colaborador comunicou o seu gestor?</label>
-                </div>
-
-                <div class="flex space-x-2">
-                    <input type="checkbox" required id="aprovado_pela_diretoria" name="aprovado_pela_diretoria" class="w-4 h-4 mt-0.5">
-                    <label for="aprovado_pela_diretoria" class="text-gray-600">Essa solicitação foi aprovada pela diretoria?</label>
-                </div>
-
-                <div class="flex w-full justify-center items-center mt-8 space-x-5">
-                    <button type="submit" class="bg-green-800 hover:bg-green-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2">
-                        Aprovar Solicitação
+            <!-- CONFIRMAÇÃO DE RECUSA DAS FÉRIAS -->
+            <div x-show="conteudoModalVerificacao == 'excluir'" class="p-10">
+                <h2 class="text-center mb-5 font-semibold text-xl text-gray-800">Tem certeza que deseja reprovar essa solicitação?</h2>
+                <p class="text-center text-base">Essa ação é irrevesível e caso seja equivocada, o colaborador terá que fazer uma nova solicitação...</p>
+                <div class="flex items-center mt-5 space-x-5 px-10">
+                    <button @click="conteudoModalVerificacao = 'verificacao' " class="bg-gray-500 hover:bg-gray-700 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2 text-center">
+                        Cancelar
                     </button>
-                    <a href="{% url 'reprovar_solicitacao' solicitacao.pk %}" class="bg-red-800 text-center hover:bg-red-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2">
+
+                    <a href="{% url 'reprovar_solicitacao' solicitacao.pk %}" class="bg-red-800 hover:bg-red-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2 text-center">
                         Reprovar Solicitação
                     </a>
+
                 </div>
-            </form>
-        
+            </div>
         </div>
     </div>
 </div>
