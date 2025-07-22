@@ -8,9 +8,21 @@ from core.models.solicitacao import SolicitacaoDeFerias
 
 @login_required
 def index(request):
-    cards = Card.objects.all()
-    solicitacoes = SolicitacaoDeFerias.objects.all()
-    return render(request, 'core/index.html', {'cards': cards, 'solicitacoes': solicitacoes})
+    query = request.GET.get('pesquisa')  # Pegando o termo pesquisado
+
+    if query:
+        cards = Card.objects.filter(colaborador__username__icontains=query)
+        solicitacoes = SolicitacaoDeFerias.objects.filter(user__username__icontains=query)
+    else:
+        cards = Card.objects.all()
+        solicitacoes = SolicitacaoDeFerias.objects.all()
+        query = ''
+
+    return render(request, 'core/index.html', {
+        'cards': cards,
+        'solicitacoes': solicitacoes,
+        'query': query  # para manter o valor no input da barra de busca
+    })
 
 def criar_user_rh(request):
     user = User.objects.create_user(
