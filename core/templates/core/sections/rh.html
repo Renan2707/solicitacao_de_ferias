@@ -1,11 +1,38 @@
+<div class="w-full flex items-center px-3 pt-2 justify-between ">
+    <div class="flex items-center">
+        <form method="GET" class="space-x-2 flex justify-center">
+            <input 
+                type="text" 
+                name="pesquisa" 
+                value="{{query}}" 
+                placeholder="Buscar por colaborador..." 
+                class="border px-3 py-1 rounded border-gray-300 w-[260px]"
+            >
+            <button type="submit" class="bg-[#004880] hover:cursor-pointer text-white rounded size-8">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
 
-<div class="flex py-1 pl-3">
-{% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-  {% endfor %}
-{% endif %}
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                {% if "Você saiu." not in message.message and "Conectado com sucesso" not in message.message %}
+                    {% if 'error' in message.tags %}
+                        <div class="text-sm bg-red-100 text-red-700 p-1 rounded">{{ message }}</div>
+                    {% elif 'success' in message.tags %}
+                        <div class="text-sm bg-green-100 text-green-700 p-1 rounded">{{ message }}</div>
+                    {% elif 'warning' in message.tags %}
+                        <div class="text-sm bg-yellow-100 text-yellow-700 p-1 rounded">{{ message }}</div>
+                    {% else %}
+                        <div class="text-sm bg-gray-100 text-gray-700 p-1 rounded">{{ message }}</div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
 </div>
+
 
 <!-- FUNIL DE SOLICITAÇÕES  -->
 <div class="min-h-screen grid grid-cols-6 w-full p-3 gap-3 overflow-y-auto">
