@@ -54,17 +54,19 @@
     
 </head>
 <body x-data="data()">
-    <header class="bg-[#004880] flex justify-center items-center p-3">
-        <div>
+    <header class="bg-[#004880] flex items-center p-3 relative h-20">
+        <div class="absolute left-1/2 -translate-x-1/2">
             <a href="/">
                 <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/logos/macrosul/logo-macrosul-branco/logo-macrosul-branco-365-941.png" alt="" class="w-60">
             </a>
         </div>
+        <a href="/accounts/logout" class="text-white flex items-center space-x-2 ml-auto pr-4">
+            <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
+        </a>
     </header>
-   
 
-        {% block content %}
-        {% endblock content %}
+    {% block content %}
+    {% endblock content %}
     
     <footer class="bg-[#004880] flex justify-center items-center p-3">
         <div>
@@ -75,19 +77,5 @@
     </footer>
 </body>
 </html>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".preventForm").forEach(function (form) {
-      form.addEventListener("submit", function (e) {
-        const submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-          submitBtn.innerHTML = '<i class="fa-solid fa-rotate-right fa-spin"></i>';
-        }
-      });
-    });
-  });
-</script>
 
 <script src="{% static 'js/data.js' %}"></script>
