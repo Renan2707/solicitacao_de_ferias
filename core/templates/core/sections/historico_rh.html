@@ -120,16 +120,16 @@
                                     {% if solicitacao.ferias_rejeitadas %}
                                     <p class="text-red-500">Solicitação Recusada</p>
 
-                                    {% elif solicitacao.solicitacao_aprovada %}
+                                    {% elif solicitacao.solicitacao_aprovada and not solicitacao.ferias_iniciadas and not solicitacao.ferias_finalizadas %}
                                     <p class="text-green-500">Solicitação Aprovada</p>
 
-                                    {% elif solicitacao.ferias_iniciadas %}
+                                    {% elif solicitacao.ferias_iniciadas and not solicitacao.ferias_finalizadas %}
                                     <p class="text-purple-500">Em Férias</p>
 
                                     {% elif solicitacao.ferias_finalizadas %}
                                     <p class="text-orange-500">Férias Finalizadas</p>
 
-                                        {% elif not solicitacao.ferias_finalizadas and not solicitacao.ferias_iniciadas and not solicitacao.solicitacao_aprovada and not solicitacao.ferias_rejeitadas %}
+                                    {% elif not solicitacao.ferias_finalizadas and not solicitacao.ferias_iniciadas and not solicitacao.solicitacao_aprovada and not solicitacao.ferias_rejeitadas %}
                                     <p class="text-yellow-500">Solicitação em Aberto</p>
 
                                     {% endif %}
