@@ -28,10 +28,7 @@ def email_nova_solicitacao(solicitacao):
     email.content_subtype = "html"  # define o conteúdo como HTML
     email.send()
 
-
-
 #EMAIL PARA O COLABORAOR AVISANDO QUE A SOLICITAÇÃO DELE FOI NEGADA
-
 def email_solicitacao_reprovada(solicitacao):
     corpo_html = (
         f'Olá, infelizmente sua solicitação de férias foi recusada. '
@@ -48,8 +45,6 @@ def email_solicitacao_reprovada(solicitacao):
     )
     email.content_subtype = "html"
     email.send()
-
-
 
 #EMAIL PARA O COLABORAOR AVISANDO QUE A SOLICITAÇÃO DELE FOI APROVADA
 def email_solicitacao_aprovada(solicitacao):
@@ -68,8 +63,6 @@ def email_solicitacao_aprovada(solicitacao):
     )
     email.content_subtype = "html"
     email.send()
-
-
 
 #EMAIL PARA O COLABORAOR E PARA O RH AVISANDO QUE AS FÉRIAS ESTÃO PRÓXIMAS DO VENCIMENTO
 def email_vencimento_proximo(card):
@@ -104,9 +97,6 @@ def email_vencimento_proximo(card):
     )
     email_colab.content_subtype = "html"
     email_colab.send()
-
-
-
 
 #EMAIL PARA O COLABORAOR AVISANDO QUE A SUA CONTA FOI CRIADA
 def email_colaborador_adicionado(card):
