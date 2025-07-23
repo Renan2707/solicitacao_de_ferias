@@ -1,8 +1,6 @@
 from django.urls import path
 from core.views.cards import add_colaborador, vencimento_proximo, renova_saldo_de_ferias, edit_colaborador, remove_colaborador
-
 from core.views.solicitacao import add_solicitacao, reprovar_solicitacao, aprovar_solicitacao, verificar_fim_das_ferias, verificar_inicio_das_ferias
-
 from core.views.index import historico_rh, index
 
 urlpatterns = [

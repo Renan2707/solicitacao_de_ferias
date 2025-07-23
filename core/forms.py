@@ -7,7 +7,6 @@ class CardForm(forms.ModelForm):
         model = Card
         fields = ['setor', 'data_de_admissao', 'data_de_vencimento_de_ferias', 'saldo_de_ferias', 'colaborador','nome', 'email']
 
-
 class SolicitacaoDeFeriasForm(forms.ModelForm):
     class Meta:
         model = SolicitacaoDeFerias
@@ -15,7 +14,6 @@ class SolicitacaoDeFeriasForm(forms.ModelForm):
 
     def clean_inicio_do_descanso(self):
         inicio = self.cleaned_data["inicio_do_descanso"]
-
         # date.weekday(): 0=segunda … 3=quinta, 4=sexta
         if inicio.weekday() in (3, 4, 5, 6):
             raise forms.ValidationError(

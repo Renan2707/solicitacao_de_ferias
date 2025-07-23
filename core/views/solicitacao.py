@@ -5,14 +5,12 @@ from core.forms import SolicitacaoDeFeriasForm, VerificaSolicitacaoForm
 from core.models.solicitacao import SolicitacaoDeFerias
 from core.models.card import Card
 from datetime import timedelta, datetime
-
 from core.views.emails import email_nova_solicitacao, email_solicitacao_reprovada, email_solicitacao_aprovada
 
 @login_required
 def add_solicitacao(request):
     card_usuario = Card.objects.get(colaborador=request.user)
     solicitacao_em_aberto = SolicitacaoDeFerias.objects.filter(user = request.user, ferias_finalizadas = False, ferias_rejeitadas = False )
-
 
     #VERIFICA SE TEM SOLICITAÇÃO EM ABERTO
     if solicitacao_em_aberto:
@@ -52,7 +50,6 @@ def reprovar_solicitacao(request, id_solicitacao):
 @login_required
 def aprovar_solicitacao(request, id_solicitacao):
     solicitacao = SolicitacaoDeFerias.objects.get(pk=id_solicitacao)
-
     if request.method == 'POST':
         form = VerificaSolicitacaoForm(request.POST)
         if form.is_valid():
@@ -73,8 +70,7 @@ def aprovar_solicitacao(request, id_solicitacao):
             return render(request, 'core/index.html', {'form': form, 'form_errors': form.errors})
     return redirect(reverse('index'))
 
-
-def verificar_inicio_das_ferias(request):
+def verificar_inicio_das_ferias():
     solicitacoes = SolicitacaoDeFerias.objects.filter(solicitacao_aprovada=True)
     for solicitacao in solicitacoes:
         if solicitacao.inicio_do_descanso <= datetime.now().date() and not solicitacao.ferias_iniciadas:
@@ -82,9 +78,7 @@ def verificar_inicio_das_ferias(request):
             solicitacao.save()
     return redirect(reverse('index'))
 
-
-
-def verificar_fim_das_ferias(request):
+def verificar_fim_das_ferias():
     solicitacoes = SolicitacaoDeFerias.objects.filter(ferias_iniciadas=True)
     for solicitacao in solicitacoes:
         if solicitacao.fim_do_descanso <= datetime.now().date():
