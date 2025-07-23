@@ -13,7 +13,7 @@
     <div x-cloak x-show="modalEditColaborador" class="h-screen w-full z-50 fixed top-0 flex justify-center items-center">
         <div @click.away="modalEditColaborador = false" class="max-h-[90%] overflow-y-auto bg-white rounded p-5">
             <h3 class="text-center font-semibold text-xl">Editar Colaborador</h3>
-            <form action="{% url 'edit_colaborador' card.pk %}" method="POST" class="space-y-3">
+            <form action="{% url 'edit_colaborador' card.pk %}" method="POST" class="space-y-3 preventForm">
                 {% csrf_token %}
                 <div>
                     <label class="text-sm font-semibold" for="nome">Nome:</label>
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="flex w-full justify-center items-center mt-5">
-                    <button class="bg-blue-800 hover:bg-blue-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2">
+                    <button type="submit" class="bg-blue-800 hover:bg-blue-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2">
                         Editar
                     </button>
                 </div>

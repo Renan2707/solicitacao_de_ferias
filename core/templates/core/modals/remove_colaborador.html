@@ -16,7 +16,7 @@
             <p>Tem certeza que deseja remover esse colaborador?</p>
 
             <div class="flex justify-center items-center mt-5 space-x-5">
-                <form action="{% url 'remove_colaborador' card.pk %}" method="POST" class="w-1/2">
+                <form action="{% url 'remove_colaborador' card.pk %}" method="POST" class="w-1/2 preventForm">
                     {% csrf_token %}
                     <button type="submit" class="bg-red-600 hover:bg-red-500 transition hover:cursor-pointer duration-200 text-white rounded py-2 w-full">
                         Remover

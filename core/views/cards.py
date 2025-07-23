@@ -81,7 +81,7 @@ def vencimento_proximo():
                 card.data_de_vencimento_proxima = False
         card.save()
     return redirect(reverse('index'))
- 
+
 def renova_saldo_de_ferias():
     cards = Card.objects.all()
     hoje = datetime.now().date()
