@@ -9,11 +9,21 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 @app.task(bind=True)
-def debug_task(self):
-    print('Hello from celery')
-
-
-@app.task(bind=True)
 def verificar_o_fim_das_ferias(self):
     from core.views.solicitacao import verificar_fim_das_ferias
     verificar_fim_das_ferias()
+
+@app.task(bind=True)
+def verificar_o_inicio_das_ferias(self):
+    from core.views.solicitacao import verificar_inicio_das_ferias
+    verificar_inicio_das_ferias()
+
+@app.task(bind=True)
+def vencimento_de_ferias_proximo(self):
+    from core.views.cards import vencimento_proximo
+    vencimento_proximo()
+
+@app.task(bind=True)
+def renova_o_saldo_de_ferias(self):
+    from core.views.cards import renova_saldo_de_ferias
+    renova_saldo_de_ferias()
