@@ -24,6 +24,22 @@
             </div>
         </div>
 
+    {% elif erro_api %}
+        <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4 mx-auto">
+            <div class="bg-red-100 text-red-700 text-center">{{erro_api}}</div>
+            <div class="flex items-center justify-center mt-4">
+                <a href="/" class="rounded bg-blue-950 text-white py-1.5 w-24 hover:bg-blue-800 text-center">Voltar</a>
+            </div>
+        </div>
+
+    {% elif feriado %}
+        <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4 mx-auto">
+            <div class="bg-red-100 text-red-700 text-center">Você não pode iniciar suas férias até 48h antes de um feriado!</div>
+            <div class="flex items-center justify-center mt-4">
+                <a href="/" class="rounded bg-blue-950 text-white py-1.5 w-24 hover:bg-blue-800 text-center">Voltar</a>
+            </div>
+        </div>
+
     {% elif form.errors %}
         <div class="bg-white rounded border border-gray-300 shadow-lg w-96 h-min p-4 mx-auto">
             <div class="bg-red-100 text-red-700 p-3 rounded">
