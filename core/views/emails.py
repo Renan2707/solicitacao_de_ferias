@@ -99,11 +99,11 @@ def email_vencimento_proximo(card):
     email_colab.send()
 
 #EMAIL PARA O COLABORAOR AVISANDO QUE A SUA CONTA FOI CRIADA
-def email_colaborador_adicionado(card):
+def email_colaborador_adicionado(card,senha_aleatoria):
     corpo_html = (
         f'Olá, {card.colaborador}!<br><br>'
         'Informamos que o setor de RH criou sua conta no site <a href="http://www.sitedasferias.com.br">www.sitedasferias.com.br</a>, onde serão realizadas as futuras solicitações de férias. '
-        'Para acessar o sistema pela primeira vez, utilize seu email corporativo da Macrosul e clique na opção "<strong>Esqueci minha senha</strong>" na tela de login para criar uma nova senha de acesso.<br><br>'
+        f'Para acessar o sistema pela primeira vez, utilize seu email corporativo da Macrosul e a senha "{senha_aleatoria}". Ou se preferir clique na opção "<strong>Esqueci minha senha</strong>" na tela de login para criar uma nova senha de acesso.<br><br>'
         'A partir de agora, as solicitações de férias deverão ser feitas exclusivamente pelo site, não sendo mais necessário o envio de email ao RH.'
         f'{assinatura_html}'
     )

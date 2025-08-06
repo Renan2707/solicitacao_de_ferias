@@ -8,6 +8,12 @@ from django.contrib import messages
 from datetime import timedelta, datetime
 from core.models.solicitacao import SolicitacaoDeFerias
 from core.views.emails import email_vencimento_proximo, email_colaborador_adicionado
+import secrets
+import string
+
+def gerar_senha_aleatoria(tamanho=10):
+    caracteres = string.ascii_letters + string.digits + "!@#$%&*"
+    return ''.join(secrets.choice(caracteres) for _ in range(tamanho))
 
 @login_required
 def add_colaborador(request):
@@ -15,15 +21,16 @@ def add_colaborador(request):
     if request.method == 'POST':
         form = CardForm(request.POST)
         if form.is_valid():
+            senha_aleatoria = gerar_senha_aleatoria()
             user = User.objects.create_user(
             username=form.cleaned_data['nome'],
-            password='M@crosul2025',
+            password=senha_aleatoria,
             email=form.cleaned_data['email'])
             user.save()
             card = form.save(commit=False)
             card.colaborador = user
             card.save()
-            email_colaborador_adicionado(card)
+            email_colaborador_adicionado(card, senha_aleatoria)
             messages.success(request, 'Colaborador adicionado com sucesso!')
             return redirect(reverse('index'))
         else:
