@@ -30,14 +30,14 @@ app.autodiscover_tasks()
 
 @app.task(bind=True)
 def verifica_solicitacoes(self):
-    from core.views.solicitacao import verificar_fim_das_ferias
-    verificar_fim_das_ferias()
+    from core.views.cards import vencimento_proximo
+    vencimento_proximo()
 
     from core.views.solicitacao import verificar_inicio_das_ferias
     verificar_inicio_das_ferias()
 
-    from core.views.cards import vencimento_proximo
-    vencimento_proximo()
-
     from core.views.cards import renova_saldo_de_ferias
     renova_saldo_de_ferias()
+
+    from core.views.solicitacao import verificar_fim_das_ferias
+    verificar_fim_das_ferias()
