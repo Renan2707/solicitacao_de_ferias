@@ -9,7 +9,6 @@
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0">
 
-
     <div x-cloak x-show="modalEditColaborador" class="h-screen w-full z-50 fixed top-0 flex justify-center items-center">
         <div @click.away="modalEditColaborador = false" class="max-h-[90%] overflow-y-auto bg-white rounded p-5">
             <h3 class="text-center font-semibold text-xl">Editar Colaborador</h3>
@@ -30,9 +29,22 @@
                         <label class="text-sm font-semibold" for="setor">Setor:</label>
                         <select name="setor" id="setor" required class="w-full border border-gray-300 rounded p-2">
                             <option value="Marketing" {% if card.setor == 'Marketing'%} selected {% endif %}>Marketing</option>
-                            <option value="Assistência Técnica" {% if card.setor == 'Assistência Técnica'%} selected {% endif %}>Assistência Técnica</option>
-                            <option value="Comercial" {% if card.setor == 'Comercial'%} selected {% endif %}>Comercial</option>
+
+                            <option value="Assistência Técnica & Suporte" {% if card.setor == 'Assistência Técnica & Suporte'%} selected {% endif %}>Assistência Técnica & Suporte</option>
+
+                            <option value="Comercial & Vendas" {% if card.setor == 'Comercial & Vendas'%} selected {% endif %}>Comercial & Vendas</option>
+
                             <option value="Licitação" {% if card.setor == 'Licitação'%} selected {% endif %}>Licitação</option>
+
+                            <option value="RH & Contabilidade" {% if card.setor == 'RH & Contabilidade'%} selected {% endif %}>RH & Contabilidade</option>
+
+                            <option value="T.I." {% if card.setor == 'T.I.'%} selected {% endif %}>T.I.</option>
+
+                            <option value="Qualidade & Regulatório" {% if card.setor == 'Qualidade & Regulatório'%} selected {% endif %}>Qualidade & Regulatório</option>
+
+                            <option value="Estoque" {% if card.setor == 'Estoque'%} selected {% endif %}>Estoque</option>
+
+                            <option value="Importação" {% if card.setor == 'Importação'%} selected {% endif %}>Importação</option>
                         </select>
                     </div>
                     <div class="w-1/2">
@@ -51,7 +63,6 @@
                         <label class="text-sm font-semibold" for="data_de_vencimento_de_ferias">Data de Vencimento:</label>
                         <input type="date" id="data_de_vencimento_de_ferias" name="data_de_vencimento_de_ferias" class="w-full border border-gray-300 rounded p-2" required value="{{ card.data_de_vencimento_de_ferias|date:'Y-m-d' }}">
                     </div>
-                
                 </div>
 
                 <div class="flex w-full justify-center items-center mt-5">
