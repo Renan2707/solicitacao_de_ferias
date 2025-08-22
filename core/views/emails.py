@@ -23,8 +23,8 @@ def email_nova_solicitacao(solicitacao):
         from_email='sistema@macrosul.com',
         to=['renan.silveira@macrosul.com'],
         cc=[solicitacao.email_gestor],  # cópia, opcional
-      
     )
+
     email.content_subtype = "html"  # define o conteúdo como HTML
     email.send()
 
@@ -43,6 +43,7 @@ def email_solicitacao_reprovada(solicitacao):
         to=[solicitacao.user.email],
         cc=[solicitacao.email_gestor],
     )
+
     email.content_subtype = "html"
     email.send()
 
@@ -61,6 +62,7 @@ def email_solicitacao_aprovada(solicitacao):
         to=[solicitacao.user.email],
         cc=[solicitacao.email_gestor],
     )
+
     email.content_subtype = "html"
     email.send()
 
@@ -79,6 +81,7 @@ def email_vencimento_proximo(card):
         from_email='sistema@macrosul.com',
         to=['renan.silveira@macrosul.com'],
     )
+
     email_rh.content_subtype = "html"
     email_rh.send()
 
@@ -95,6 +98,7 @@ def email_vencimento_proximo(card):
         from_email='sistema@macrosul.com',
         to=[card.colaborador.email],
     )
+
     email_colab.content_subtype = "html"
     email_colab.send()
 
@@ -114,5 +118,6 @@ def email_colaborador_adicionado(card,senha_aleatoria):
         from_email='sistema@macrosul.com',
         to=[card.colaborador.email],
     )
+    
     email.content_subtype = "html"
     email.send()

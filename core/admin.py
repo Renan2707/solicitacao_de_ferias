@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from core.models.solicitacao import SolicitacaoDeFerias
 from core.models.card import Card
 

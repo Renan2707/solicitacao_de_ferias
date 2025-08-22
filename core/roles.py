@@ -8,3 +8,4 @@ class RH(AbstractUserRole):
         'approve_requests': True,
         'reject_requests': True,
     }
+    

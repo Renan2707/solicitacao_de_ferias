@@ -39,7 +39,7 @@ def add_colaborador(request):
     else:
         form = CardForm()
         return render(request, 'core/index.html', {'form': form,'cards': cards})
-    
+
 @login_required
 def edit_colaborador(request, id_colaborador):
     card = Card.objects.get(pk=id_colaborador)

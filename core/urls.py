@@ -16,6 +16,7 @@ urlpatterns = [
 
    path('verificar_fim_das_ferias/', verificar_fim_das_ferias, name='verificar_fim_das_ferias'),
    path('verificar_inicio_das_ferias/', verificar_inicio_das_ferias, name='verificar_inicio_das_ferias'),
+   
    path('renova_saldo_de_ferias/', renova_saldo_de_ferias, name='renova_saldo_de_ferias'),
 
    path('historico_rh/', historico_rh, name='historico_rh'),

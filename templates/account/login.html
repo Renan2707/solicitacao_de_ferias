@@ -6,7 +6,9 @@
 
 <div class="flex flex-col items-center mt-5 md:mt-10 lg:mt-16 h-screen">
     <div class="">
-        <h2 class="mt-2 text-center text-2xl font-bold tracking-tight text-gray-900">{% trans "Acesse sua conta" %}</h2>
+        <h2 class="mt-2 text-center text-2xl font-bold tracking-tight text-gray-900">
+            Acesse sua conta
+        </h2>
     </div>
 
     <div class="mt-4 py-6 sm:mx-auto sm:w-full sm:max-w-md border border-gray-300 rounded-lg shadow-xl mb-20">
@@ -20,8 +22,6 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                
-
                 <div>
                     <label for="Username" class="block text-sm font-medium text-gray-700">E-mail</label>
                     <div class="mt-1">
@@ -50,30 +50,30 @@
                     </div>
 
                     <div class="text-sm">
-
-                        <a class="button secondaryAction font-medium text-blue-600 hover:text-blue-500" href="{% url 'account_reset_password' %}">{% trans "Esqueceu sua senha?" %}</a>
+                        <a class="button secondaryAction font-medium text-blue-600 hover:text-blue-500" href="{% url 'account_reset_password' %}">
+                            Esqueceu sua senha?
+                        </a>
                     </div>
                 </div>
 
                 <div>
-                    <button type="submit" class="hover:cursor-pointer flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Entrar</button>
+                    <button type="submit" class="hover:cursor-pointer flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Entrar
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block botao_login %}
-
 <div class="flex items-center">
-  <a href="/accounts/login/" class="font-bold hover:underline text-sm">Login </a>
-  <span class="ml-2 h-10 w-10 overflow-hidden rounded-full bg-gray-300">
-    <svg class="h-full w-full text-gray-500" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-    </svg>
-  </span>
+    <a href="/accounts/login/" class="font-bold hover:underline text-sm">Login</a>
+    <span class="ml-2 h-10 w-10 overflow-hidden rounded-full bg-gray-300">
+        <svg class="h-full w-full text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+    </span>
 </div>
-
 {% endblock %}

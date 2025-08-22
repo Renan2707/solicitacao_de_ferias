@@ -1,13 +1,7 @@
 <div class="w-full flex items-center px-3 pt-2 justify-between ">
     <div class="flex items-center">
         <form method="GET" class="space-x-2 flex justify-center">
-            <input 
-                type="text" 
-                name="pesquisa" 
-                value="{{query}}" 
-                placeholder="Buscar por colaborador..." 
-                class="border px-3 py-1 rounded border-gray-300 w-[260px] text-gray-600 appearance-none outline-blue-500 focus:outline-1"
-            >
+            <input type="text" name="pesquisa" value="{{query}}" placeholder="Buscar por colaborador..." class="border px-3 py-1 rounded border-gray-300 w-[260px] text-gray-600 appearance-none outline-blue-500 focus:outline-1">
             <button type="submit" class="bg-[#004880] hover:cursor-pointer text-white rounded size-8">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -46,75 +40,73 @@
         </div>
         <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for card in cards %}
-            {% if not card.data_de_vencimento_proxima %}
-                <div x-data="{options:false, modalEditColaborador:false, modalRemoveColaborador:false}" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
-                    <div>
-                        <div class="flex items-center justify-end relative">
-                            <button @click="options = true" class="hover:cursor-pointer transition duration-200 hover:bg-gray-200 size-5 rounded-full flex items-center justify-center text-gray-400">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </button>
-
-                            <div x-cloak x-transition x-show="options" @click.away="options = false" class="bg-white border-2 border-gray-300 divide-y divide-gray-300 text-sm rounded shadow-lg w-40 h-20 absolute top-6 right-0">
-                                <div @click="modalEditColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
-                                <i class="fa-solid fa-user-pen text-xs mr-1"></i> Editar Colaborador
-                                </div>
-                                <div  @click="modalRemoveColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
-                                    <i class="fa-solid fa-trash text-xs mr-1"></i> Excluir Colaborador
-                                </div>
-                            </div>
-                        </div>
-                   
+                {% if not card.data_de_vencimento_proxima %}
+                    <div x-data="{options:false, modalEditColaborador:false, modalRemoveColaborador:false}" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
                         <div>
-                            <p class="text-base text-black">{{card.colaborador}} 
-                            </p>
-                        </div>
-                    </div>
+                            <div class="flex items-center justify-end relative">
+                                <button @click="options = true" class="hover:cursor-pointer transition duration-200 hover:bg-gray-200 size-5 rounded-full flex items-center justify-center text-gray-400">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </button>
+
+                                <div x-cloak x-transition x-show="options" @click.away="options = false" class="bg-white border-2 border-gray-300 divide-y divide-gray-300 text-sm rounded shadow-lg w-40 h-20 absolute top-6 right-0">
+                                    <div @click="modalEditColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
+                                    <i class="fa-solid fa-user-pen text-xs mr-1"></i> Editar Colaborador
+                                    </div>
+                                    <div  @click="modalRemoveColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
+                                        <i class="fa-solid fa-trash text-xs mr-1"></i> Excluir Colaborador
+                                    </div>
+                                </div>
+                            </div>
                     
-                    
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-briefcase mt-0.5"></i>
                             <div>
-                                <p>SETOR:</p>
-                                <p class="font-normal"> {{card.setor}}</p> 
+                                <p class="text-base text-black">{{card.colaborador}} 
+                                </p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-forward mt-0.5"></i>
-                            <div>
-                                <p>SALDO DE FÉRIAS:</p>
-                                <p class="font-normal"> {{card.saldo_de_ferias}}</p> 
+                        
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-briefcase mt-0.5"></i>
+                                <div>
+                                    <p>SETOR:</p>
+                                    <p class="font-normal"> {{card.setor}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>DATA DE ADMISSÃO:</p>
-                                <p class="font-normal">{{ card.data_de_admissao|date:'d/m/Y' }}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-forward mt-0.5"></i>
+                                <div>
+                                    <p>SALDO DE FÉRIAS:</p>
+                                    <p class="font-normal"> {{card.saldo_de_ferias}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>DATA DE VENCIMENTO:</p>
-                                <p class="font-normal">{{card.data_de_vencimento_de_ferias|date:'d/m/Y' }}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE ADMISSÃO:</p>
+                                    <p class="font-normal">{{ card.data_de_admissao|date:'d/m/Y' }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% include 'core/modals/edit_colaborador.html' %}
-                {% include 'core/modals/remove_colaborador.html' %}
 
-                </div>
-            {% endif %}
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE VENCIMENTO:</p>
+                                    <p class="font-normal">{{card.data_de_vencimento_de_ferias|date:'d/m/Y' }}</p> 
+                                </div>
+                            </div>
+                        </div>
+                        {% include 'core/modals/edit_colaborador.html' %}
+                        {% include 'core/modals/remove_colaborador.html' %}
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     </section>
@@ -125,75 +117,73 @@
         </div>
         <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for card in cards %}
-            {% if card.data_de_vencimento_proxima %}
-               <div x-data="{options:false, modalEditColaborador:false, modalRemoveColaborador:false}" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
-                    <div>
-                        <div class="flex items-center justify-end relative">
-                            <button @click="options = true" class="hover:cursor-pointer transition duration-200 hover:bg-gray-200 size-5 rounded-full flex items-center justify-center text-gray-400">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </button>
-
-                            <div x-cloak x-transition x-show="options" @click.away="options = false" class="bg-white border-2 border-gray-300 divide-y divide-gray-300 text-sm rounded shadow-lg w-40 h-20 absolute top-6 right-0">
-                                <div @click="modalEditColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
-                                <i class="fa-solid fa-user-pen text-xs mr-1"></i> Editar Colaborador
-                                </div>
-                                <div  @click="modalRemoveColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
-                                    <i class="fa-solid fa-trash text-xs mr-1"></i> Excluir Colaborador
-                                </div>
-                            </div>
-                        </div>
-                   
+                {% if card.data_de_vencimento_proxima %}
+                    <div x-data="{options:false, modalEditColaborador:false, modalRemoveColaborador:false}" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
                         <div>
-                            <p class="text-base text-black">{{card.colaborador}} 
-                            </p>
-                        </div>
-                    </div>
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-briefcase mt-0.5"></i>
-                            <div>
-                                <p>SETOR:</p>
-                                <p class="font-normal"> {{card.setor}}</p> 
-                            </div>
-                        </div>
-                    </div>
+                            <div class="flex items-center justify-end relative">
+                                <button @click="options = true" class="hover:cursor-pointer transition duration-200 hover:bg-gray-200 size-5 rounded-full flex items-center justify-center text-gray-400">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </button>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-forward mt-0.5"></i>
+                                <div x-cloak x-transition x-show="options" @click.away="options = false" class="bg-white border-2 border-gray-300 divide-y divide-gray-300 text-sm rounded shadow-lg w-40 h-20 absolute top-6 right-0">
+                                    <div @click="modalEditColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
+                                    <i class="fa-solid fa-user-pen text-xs mr-1"></i> Editar Colaborador
+                                    </div>
+                                    <div  @click="modalRemoveColaborador = true" class="h-1/2 flex items-center justify-center hover:bg-gray-100">
+                                        <i class="fa-solid fa-trash text-xs mr-1"></i> Excluir Colaborador
+                                    </div>
+                                </div>
+                            </div>
+                    
                             <div>
-                                <p>SALDO DE FÉRIAS:</p>
-                                <p class="font-normal"> {{card.saldo_de_ferias}}</p> 
+                                <p class="text-base text-black">{{card.colaborador}} 
+                                </p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>DATA DE ADMISSÃO:</p>
-                                <p class="font-normal">{{ card.data_de_admissao|date:'d/m/Y' }}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-briefcase mt-0.5"></i>
+                                <div>
+                                    <p>SETOR:</p>
+                                    <p class="font-normal"> {{card.setor}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>DATA DE VENCIMENTO:</p>
-                                <p class="text-red-700">{{ card.data_de_vencimento_de_ferias|date:'d/m/Y' }}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-forward mt-0.5"></i>
+                                <div>
+                                    <p>SALDO DE FÉRIAS:</p>
+                                    <p class="font-normal"> {{card.saldo_de_ferias}}</p> 
+                                </div>
                             </div>
                         </div>
+
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE ADMISSÃO:</p>
+                                    <p class="font-normal">{{ card.data_de_admissao|date:'d/m/Y' }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE VENCIMENTO:</p>
+                                    <p class="text-red-700">{{ card.data_de_vencimento_de_ferias|date:'d/m/Y' }}</p> 
+                                </div>
+                            </div>
+                        </div>
+                        {% include 'core/modals/edit_colaborador.html' %}
+                        {% include 'core/modals/remove_colaborador.html' %}
                     </div>
-                   
-                    {% include 'core/modals/edit_colaborador.html' %}
-                    {% include 'core/modals/remove_colaborador.html' %}
-                   
-               
-                </div>
-            {% endif %}
+                {% endif %}
             {% endfor %}
         </div>
     </section>
@@ -214,49 +204,49 @@
         <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for solicitacao in solicitacoes %}
                 {% if not solicitacao.solicitacao_aprovada and not solicitacao.ferias_iniciadas and not solicitacao.ferias_finalizadas and not solicitacao.ferias_rejeitadas %}
-                <div x-data="{ modalVerificaSolicitacao:false }" @click="modalVerificaSolicitacao = true" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
-                    <p class="text-base text-black">{{solicitacao.user}}</p>
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
-                            <div>
-                                <p>DIAS DE DESCANSO:</p>
-                                <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                    <div x-data="{ modalVerificaSolicitacao:false }" @click="modalVerificaSolicitacao = true" class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                        <p class="text-base text-black">{{solicitacao.user}}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                                <div>
+                                    <p>DIAS DE DESCANSO:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
-                            <div>
-                                <p>DIAS PARA VENDA:</p>
-                                <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                                <div>
+                                    <p>DIAS PARA VENDA:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>DATA DE INICIO:</p>
-                                <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE INICIO:</p>
+                                    <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>FIM DO DESCANSO:</p>
-                                <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>FIM DO DESCANSO:</p>
+                                    <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                                </div>
                             </div>
                         </div>
+                        {% include 'core/modals/verifica_solicitacao.html' %}
                     </div>
-                    {% include 'core/modals/verifica_solicitacao.html' %}
-                </div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -269,48 +259,48 @@
         <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for solicitacao in solicitacoes %}
                 {% if solicitacao.solicitacao_aprovada and not solicitacao.ferias_iniciadas %}
-                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
-                    <p class="text-base text-black">{{solicitacao.user}}</p>
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
-                            <div>
-                                <p>DIAS DE DESCANSO:</p>
-                                <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                    <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                        <p class="text-base text-black">{{solicitacao.user}}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                                <div>
+                                    <p>DIAS DE DESCANSO:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
-                            <div>
-                                <p>DIAS PARA VENDA:</p>
-                                <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                                <div>
+                                    <p>DIAS PARA VENDA:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>DATA DE INICIO:</p>
-                                <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE INICIO:</p>
+                                    <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>FIM DO DESCANSO:</p>
-                                <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>FIM DO DESCANSO:</p>
+                                    <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -323,48 +313,48 @@
         <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
             {% for solicitacao in solicitacoes %}
                 {% if solicitacao.ferias_rejeitadas %}
-                <div class="w-full hover:cursor-pointer rounded bg-[#f7f8fa] shadow hover:shadow-lg p-2 text-sm text-gray-300 font-semibold space-y-3">
-                    <p class="text-base text-gray-400">{{solicitacao.user}}</p>
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
-                            <div>
-                                <p>DIAS DE DESCANSO:</p>
-                                <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                    <div class="w-full hover:cursor-pointer rounded bg-[#f7f8fa] shadow hover:shadow-lg p-2 text-sm text-gray-300 font-semibold space-y-3">
+                        <p class="text-base text-gray-400">{{solicitacao.user}}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                                <div>
+                                    <p>DIAS DE DESCANSO:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
-                            <div>
-                                <p>DIAS PARA VENDA:</p>
-                                <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                                <div>
+                                    <p>DIAS PARA VENDA:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>DATA DE INICIO:</p>
-                                <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE INICIO:</p>
+                                    <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>FIM DO DESCANSO:</p>
-                                <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>FIM DO DESCANSO:</p>
+                                    <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -377,56 +367,53 @@
         <div class="element h-[90%] mt-3 border border-gray-300 bg-gray-100 rounded p-2 overflow-y-auto pb-5 space-y-4">
              {% for solicitacao in solicitacoes %}
                 {% if solicitacao.solicitacao_aprovada and solicitacao.ferias_iniciadas and not solicitacao.ferias_finalizadas %}
-                <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
-                    <p class="text-base text-black">{{solicitacao.user}}</p>
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
-                            <div>
-                                <p>DIAS DE DESCANSO:</p>
-                                <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                    <div class="w-full hover:cursor-pointer rounded bg-white shadow hover:shadow-lg p-2 text-sm text-gray-500 font-semibold space-y-3">
+                        <p class="text-base text-black">{{solicitacao.user}}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-umbrella-beach mt-0.5"></i>
+                                <div>
+                                    <p>DIAS DE DESCANSO:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_de_descanso}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
-                            <div>
-                                <p>DIAS PARA VENDA:</p>
-                                <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-money-bill-wave mt-0.5"></i>
+                                <div>
+                                    <p>DIAS PARA VENDA:</p>
+                                    <p class="font-normal"> {{solicitacao.dias_vendidos}}</p> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>DATA DE INICIO:</p>
-                                <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>DATA DE INICIO:</p>
+                                    <p class="font-normal">{{ solicitacao.inicio_do_descanso|date:'d/m/Y' }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="text-xs">
-                        <div class="flex space-x-1">
-                            <i class="fa-solid fa-calendar-days mt-0.5"></i>
-                            <div>
-                                <p>FIM DO DESCANSO:</p>
-                                <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                        <div class="text-xs">
+                            <div class="flex space-x-1">
+                                <i class="fa-solid fa-calendar-days mt-0.5"></i>
+                                <div>
+                                    <p>FIM DO DESCANSO:</p>
+                                    <p class="font-normal">{{ solicitacao.fim_do_descanso|date:'d/m/Y' }}</p> 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 {% endif %}
             {% endfor %}
         </div>
     </section>
 </div>
-
-
-
 <!-- MODAL PARA ADICIONAR COLABORADOR -->
 {% include 'core/modals/add_colaborador.html' %}
 

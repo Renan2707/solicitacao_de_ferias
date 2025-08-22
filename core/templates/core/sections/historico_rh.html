@@ -1,5 +1,4 @@
 {% extends 'partials/base.html' %}
-
 {% block content %}
 
 <div class="bg-gray-100 min-h-screen">
@@ -61,11 +60,7 @@
                 <div id="limparFiltro" class="hidden">
                     <a href="{% url 'historico_rh' %}"  class="rounded bg-blue-800 py-1.5 text-white px-4 text-center hover:bg-blue-950 transition duration-200 hover:cursor-pointer">Limpar</a>
                 </div>
-
-
             </form>
-
-
 
             {% for solicitacao in solicitacoes %}
                 <div class="w-full hover:cursor-pointer rounded border border-gray-300 bg-white shadow hover:shadow-lg p-5 text-sm text-gray-500 font-semibold space-y-3">
@@ -138,8 +133,6 @@
                         </div>
                     </div>
                 </div>
-    
-                
             {% endfor %}
         </div>
     </div>
@@ -172,6 +165,4 @@
         }
     })
 </script>
-
-
 {% endblock content %}

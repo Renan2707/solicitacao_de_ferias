@@ -63,5 +63,5 @@ def historico_rh(request):
                 solicitacoes = SolicitacaoDeFerias.objects.all()
         else:
             solicitacoes = SolicitacaoDeFerias.objects.all()
-    
+            
         return render(request, 'core/sections/historico_rh.html', {'cards': cards, 'solicitacoes': solicitacoes})

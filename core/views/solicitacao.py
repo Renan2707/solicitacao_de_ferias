@@ -13,7 +13,6 @@ def verifica_feriados(data_inicio_das_ferias):
     proximo_ano = datetime.now().year + 1
     url_ano_atual = f'https://brasilapi.com.br/api/feriados/v1/{ano_atual}'
     url_proximo_ano = f'https://brasilapi.com.br/api/feriados/v1/{proximo_ano}'
-
     feriados_curitiba = [
         {
             "date":f"{ano_atual}-09-08",
@@ -42,7 +41,6 @@ def verifica_feriados(data_inicio_das_ferias):
             diferenca = (feriado - data_inicio_das_ferias).days
             if 0 <= diferenca <= 2:  # feriado no mesmo dia, ou 1 ou 2 dias depois
                 return False  # Não pode iniciar férias nesse período
-
     return True  # OK: não é feriado nem até 48h antes
 
 
@@ -90,7 +88,6 @@ def add_solicitacao(request):
     else:
         form = SolicitacaoDeFeriasForm()
         return render(request, 'core/index.html', {'form': form})
-    
 
 @login_required
 def reprovar_solicitacao(request, id_solicitacao):
