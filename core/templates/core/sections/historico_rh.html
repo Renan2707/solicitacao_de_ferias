@@ -1,28 +1,16 @@
 {% extends 'partials/base.html' %}
 {% block content %}
 
-<div class="bg-gray-100 min-h-screen">
+<div class="bg-gray-100 min-h-screen pb-20">
     <h3 class="text-4xl text-center py-3 text-[#004880]">Histórico de Solicitações</h3>
     <div class="bg-gray-200 h-full w-5xl rounded mx-auto border border-gray-300 shadow p-5 space-y-3">
-        <div class="p-5 rounded bg-white space-y-3">
+        <div class="p-5 rounded bg-white space-y-3 max-h-screen overflow-y-auto">
             <!-- FILTROS  -->
             <form method="POST" action="#" class="flex items-center space-x-2">
                 {% csrf_token %}
-                <p class="font-semibold text-gray-600">Filtros:</p>
-                <div class="relative">
-                    <select id="tipo_filtro" name="tipo_filtro" class="appearance-none px-2 bg-white border border-gray-300 text-gray-700 py-1 rounded leading-tight min-w-40">
-                       <option value="">Selecione</option>
-                       <option value="status">Status</option>
-                       <option value="colaborador">Colaborador</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"><path d="M5.516 7.548L10 12.032l4.484-4.484L16 9.064 10 15.064 4 9.064z"/>
-                        </svg>
-                    </div>
-                </div>
                 <!-- FILTROS COLABORADOR  -->
-                 <div id="filtro_colaborador" class="relative hidden">
+                <div id="filtro_colaborador" class="relative flex space-x-1 items-center ">
+                    <p class="font-semibold text-gray-600">Colaborador:</p>
                     <select name="filtro_colaborador" class="appearance-none px-2 bg-white border border-gray-300 text-gray-700 py-1  rounded leading-tight min-w-40">
                         <option value="">Selecione</option>
                         {% for card in cards %}
@@ -37,7 +25,8 @@
                 </div>
 
                 <!-- FILTROS DE STATUS  -->
-                <div id="filtro_status" class="relative hidden">
+                <div id="filtro_status" class="relative flex space-x-1 items-center ">
+                    <p class="font-semibold text-gray-600">Status:</p>
                     <select name="filtro_status" class="appearance-none px-2 bg-white border border-gray-300 text-gray-700 py-1  rounded leading-tight min-w-40">
                         <option value="">Selecione</option>
                         <option value="recusada">Recusada</option>
@@ -55,6 +44,9 @@
 
                 <div>
                     <button type="submit" class="rounded bg-blue-800 text-white py-1 px-4 text-center hover:bg-blue-950 transition duration-200 hover:cursor-pointer">Filtrar</button>
+                    <a href="">
+                        <button type="button" class="rounded bg-gray-500 text-white py-1 px-4 text-center hover:bg-gray-700 transition duration-200 hover:cursor-pointer">Limpar</button>
+                    </a>
                 </div>
 
                 <div id="limparFiltro" class="hidden">
@@ -134,35 +126,8 @@
                     </div>
                 </div>
             {% endfor %}
+
         </div>
     </div>
 </div>
-
-<script>
-    const filtro_colaborador = document.querySelector('#filtro_colaborador')
-    const filtro_status = document.querySelector('#filtro_status')
-    const tipo_filtro = document.querySelector('#tipo_filtro')
-    const limparFiltro = document.querySelector('#limparFiltro')
-
-    tipo_filtro.addEventListener('change', function(e){
-
-        if(tipo_filtro.value == 'colaborador'){
-            filtro_colaborador.classList.remove('hidden')
-        }else{
-            filtro_colaborador.classList.add('hidden')
-        }
-
-        if(tipo_filtro.value == 'status'){
-            filtro_status.classList.remove('hidden')
-        }else{
-            filtro_status.classList.add('hidden')
-        }
-
-        if(tipo_filtro.value == ""){
-            limparFiltro.classList.add('hidden')
-        }else{
-            limparFiltro.classList.remove('hidden')
-        }
-    })
-</script>
 {% endblock content %}
