@@ -47,7 +47,7 @@
                 <div class="w-full p-2 border border-gray-200 space-x-3 text-sm">
                     <p class="text-gray-600 font-semibold">Arquivo de comunicação com gestor:</p>
                     <p class="text-gray-600">
-                        <a href="{{solicitacao.comunicacao_com_gestor}}" class="text-blue-500 hover:underline">Clique aqui para visualizar</a>
+                        <a href="/media/{{solicitacao.comunicacao_com_gestor}}" class="text-blue-500 hover:underline">Clique aqui para visualizar</a>
                     </p>
                 </div>
                 <div class="w-full p-2 border border-gray-200 space-x-3 text-sm">
@@ -96,19 +96,25 @@
                 </form>
             </div>
             <!-- CONFIRMAÇÃO DE RECUSA DAS FÉRIAS -->
-            <div x-show="conteudoModalVerificacao == 'excluir'" class="p-10">
+            <form method="POST" action="{% url 'reprovar_solicitacao' solicitacao.pk %}" x-show="conteudoModalVerificacao == 'excluir'" class="p-10" 
+            @submit.prevent="carregandoReprovacao = true; $el.submit()">
+                {% csrf_token %}
                 <h2 class="text-center mb-5 font-semibold text-xl text-gray-800">Tem certeza que deseja reprovar essa solicitação?</h2>
-                <p class="text-center text-base">Essa ação é irrevesível e caso seja equivocada, o colaborador terá que fazer uma nova solicitação...</p>
+                <p class="text-base">Digite aqui o motivo da reprovação da solicitação:</p>
+
+                <textarea name="motivo_rejeicao" id="motivo_rejeicao" class="border border-gray-200 w-full h-20 p-2" required></textarea>
+
                 <div class="flex items-center mt-5 space-x-5 px-10">
-                    <button @click="conteudoModalVerificacao = 'verificacao' " class="bg-gray-500 hover:bg-gray-700 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2 text-center">
+                    <button type="button" @click="conteudoModalVerificacao = 'verificacao' " class="bg-gray-500 hover:bg-gray-700 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2 text-center">
                         Cancelar
                     </button>
 
-                    <a href="{% url 'reprovar_solicitacao' solicitacao.pk %}" class="bg-red-800 hover:bg-red-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2 text-center">
-                        Reprovar Solicitação
-                    </a>
+                    <button type="submit" class="bg-red-800 hover:bg-red-600 transition duration-200 hover:cursor-pointer text-white rounded py-2 w-1/2 text-center">
+                        <p x-show="!carregandoReprovacao">Reprovar Solicitação</p>
+                        <p x-show="carregandoReprovacao"><i class="fa-solid fa-arrow-rotate-right animate-spin"></i></p>
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
