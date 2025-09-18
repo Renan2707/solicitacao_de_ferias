@@ -13,7 +13,7 @@ assinatura_html = """
 def email_nova_solicitacao(solicitacao):
     corpo_html = (
         f'Olá, o colaborador(a) {solicitacao.user} criou uma nova solicitação de férias. '
-        'Entre em <a href="http://www.sitedeferias.com.br">www.sitedeferias.com.br</a> e realize a verificação desse pedido.'
+        'Entre em <a href="https://ferias.macrosul.com/">https://ferias.macrosul.com/</a> e realize a verificação desse pedido.'
         f'{assinatura_html}'
     )
 
@@ -31,7 +31,8 @@ def email_nova_solicitacao(solicitacao):
 #EMAIL PARA O COLABORAOR AVISANDO QUE A SOLICITAÇÃO DELE FOI NEGADA
 def email_solicitacao_reprovada(solicitacao):
     corpo_html = (
-        f'Olá, infelizmente sua solicitação de férias foi recusada. '
+        f'Olá {solicitacao.user}, infelizmente sua solicitação de férias foi recusada. '
+        f'O motivo informado pelo RH foi: {solicitacao.motivo_rejeicao}. '
         'Para mais detalhes, entre em contato com o setor de RH.'
         f'{assinatura_html}'
     )
@@ -50,7 +51,7 @@ def email_solicitacao_reprovada(solicitacao):
 #EMAIL PARA O COLABORAOR AVISANDO QUE A SOLICITAÇÃO DELE FOI APROVADA
 def email_solicitacao_aprovada(solicitacao):
     corpo_html = (
-        f'Olá, sua solicitação de férias no período de {solicitacao.inicio_do_descanso} até {solicitacao.fim_do_descanso} foi aprovada! '
+        f'Olá {solicitacao.user}, sua solicitação de férias no período de {solicitacao.inicio_do_descanso} até {solicitacao.fim_do_descanso} foi aprovada! '
         'Aproveite bem suas férias, bom descanso!'
         f'{assinatura_html}'
     )
@@ -88,7 +89,7 @@ def email_vencimento_proximo(card):
     corpo_html_colaborador = (
         f'Atenção {card.colaborador}, suas férias estão próximas do vencimento ({card.data_de_vencimento_de_ferias}) '
         f'e você ainda possui um saldo de férias de: {card.saldo_de_ferias}. '
-        'Por favor, crie uma solicitação de férias em <a href="http://www.sitedeferias.com.br">www.sitedeferias.com.br</a> ou entre em contato com o RH para regularizar a situação o mais rápido possível.'
+        'Por favor, crie uma solicitação de férias em <a href="https://ferias.macrosul.com/">https://ferias.macrosul.com/</a> ou entre em contato com o RH para regularizar a situação o mais rápido possível.'
         f'{assinatura_html}'
     )
 
@@ -106,7 +107,7 @@ def email_vencimento_proximo(card):
 def email_colaborador_adicionado(card,senha_aleatoria):
     corpo_html = (
         f'Olá, {card.colaborador}!<br><br>'
-        'Informamos que o setor de RH criou sua conta no site <a href="http://www.sitedasferias.com.br">www.sitedasferias.com.br</a>, onde serão realizadas as futuras solicitações de férias. '
+        'Informamos que o setor de RH criou sua conta no site <a href="https://ferias.macrosul.com/">https://ferias.macrosul.com/</a>, onde serão realizadas as futuras solicitações de férias. '
         f'Para acessar o sistema pela primeira vez, utilize seu email corporativo da Macrosul e a senha "{senha_aleatoria}". Ou se preferir clique na opção "<strong>Esqueci minha senha</strong>" na tela de login para criar uma nova senha de acesso.<br><br>'
         'A partir de agora, as solicitações de férias deverão ser feitas exclusivamente pelo site, não sendo mais necessário o envio de email ao RH.'
         f'{assinatura_html}'

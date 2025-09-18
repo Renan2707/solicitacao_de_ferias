@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from core.forms import SolicitacaoDeFeriasForm, VerificaSolicitacaoForm
@@ -6,6 +6,7 @@ from core.models.solicitacao import SolicitacaoDeFerias
 from core.models.card import Card
 from datetime import timedelta, datetime
 import requests
+from django.http import HttpResponseNotAllowed
 from core.views.emails import email_nova_solicitacao, email_solicitacao_reprovada, email_solicitacao_aprovada
 
 def verifica_feriados(data_inicio_das_ferias):
@@ -91,11 +92,16 @@ def add_solicitacao(request):
 
 @login_required
 def reprovar_solicitacao(request, id_solicitacao):
-    solicitacao = SolicitacaoDeFerias.objects.get(pk=id_solicitacao)
-    solicitacao.ferias_rejeitadas = True
-    solicitacao.save()
-    email_solicitacao_reprovada(solicitacao)
-    return redirect(reverse('index'))
+    solicitacao = get_object_or_404(SolicitacaoDeFerias, pk=id_solicitacao)
+
+    if request.method == 'POST':
+        solicitacao.ferias_rejeitadas = True
+        solicitacao.motivo_rejeicao = request.POST.get('motivo_rejeicao')
+        solicitacao.save()
+        email_solicitacao_reprovada(solicitacao)
+        return redirect(reverse('index'))
+
+    return HttpResponseNotAllowed(['POST'])
 
 @login_required
 def aprovar_solicitacao(request, id_solicitacao):

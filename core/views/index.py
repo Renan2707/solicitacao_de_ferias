@@ -37,31 +37,26 @@ def historico_rh(request):
         solicitacoes = SolicitacaoDeFerias.objects.all()
         return render(request, 'core/sections/historico_rh.html', {'cards': cards, 'solicitacoes': solicitacoes})
     else:
-        tipo_filtro = request.POST.get('tipo_filtro')
         filtro_colaborador = request.POST.get('filtro_colaborador')
         filtro_status = request.POST.get('filtro_status')
 
+        solicitacoes = SolicitacaoDeFerias.objects.all()
+
+        # Filtra por colaborador se informado
         if filtro_colaborador:
-            solicitacoes = SolicitacaoDeFerias.objects.filter(user__username = filtro_colaborador)
+            solicitacoes = solicitacoes.filter(user__username=filtro_colaborador)
 
-        elif tipo_filtro == 'status':
+        # Filtra por status se informado
+        if filtro_status:
             if filtro_status == 'recusada':
-                solicitacoes = SolicitacaoDeFerias.objects.filter(ferias_rejeitadas = True)
-
+                solicitacoes = solicitacoes.filter(ferias_rejeitadas=True)
             elif filtro_status == 'em-aberto':
-                solicitacoes = SolicitacaoDeFerias.objects.filter(solicitacao_aprovada = False, ferias_rejeitadas = False)
-
+                solicitacoes = solicitacoes.filter(solicitacao_aprovada=False, ferias_rejeitadas=False)
             elif filtro_status == 'aprovada':
-                solicitacoes = SolicitacaoDeFerias.objects.filter(solicitacao_aprovada = True, ferias_iniciadas = False)
-
+                solicitacoes = solicitacoes.filter(solicitacao_aprovada=True, ferias_iniciadas=False)
             elif filtro_status == 'finalizada':
-                solicitacoes = SolicitacaoDeFerias.objects.filter(ferias_finalizadas = True)
-
+                solicitacoes = solicitacoes.filter(ferias_finalizadas=True)
             elif filtro_status == 'em-ferias':
-                solicitacoes = SolicitacaoDeFerias.objects.filter(ferias_iniciadas = True, ferias_finalizadas = False)
-            else:
-                solicitacoes = SolicitacaoDeFerias.objects.all()
-        else:
-            solicitacoes = SolicitacaoDeFerias.objects.all()
-            
+                solicitacoes = solicitacoes.filter(ferias_iniciadas=True, ferias_finalizadas=False)
+
         return render(request, 'core/sections/historico_rh.html', {'cards': cards, 'solicitacoes': solicitacoes})
