@@ -3,6 +3,7 @@ function data(){
         modalAddColaborador: false,
         tabColaborador: 'solicitar',
         dropDownHistorico: false,
+        carregandoReprovacao: false,
     }
 }
 
