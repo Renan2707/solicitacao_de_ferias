@@ -4,6 +4,7 @@ function data(){
         tabColaborador: 'solicitar',
         dropDownHistorico: false,
         carregandoReprovacao: false,
+        logout: false,
     }
 }
 

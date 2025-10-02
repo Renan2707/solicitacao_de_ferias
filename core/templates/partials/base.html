@@ -58,7 +58,8 @@
                 <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/logos/macrosul/logo-macrosul-branco/logo-macrosul-branco-365-941.png" alt="" class="w-60">
             </a>
         </div>
-        <a href="/accounts/logout" class="text-white flex items-center space-x-2 ml-auto pr-4">
+        <a @mouseover="logout = true" @mouseleave="logout = false" href="/accounts/logout" class="text-white flex items-center space-x-2 ml-auto pr-4">
+            <p x-show="logout" x-transition x-cloak>Logout</p>
             <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
         </a>
     </header>
