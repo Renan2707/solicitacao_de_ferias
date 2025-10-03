@@ -24,8 +24,9 @@ def index(request):
 
 def criar_user_rh(request):
     user = User.objects.create_user(
-        username='renan_rh',
-        password='RE0101si@')
+        username='rh_macrosul',
+        email='rh@macrosul.com',
+        password='M@crosul2025')
     user.save()
     assign_role(user, 'rh')
     return HttpResponse("Usuário RH criado com sucesso!")   

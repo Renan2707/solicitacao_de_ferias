@@ -7,7 +7,7 @@ from core.views.index import index, criar_user_rh
 
 urlpatterns = [
     path('admin-django-solicitacao-ferias-macrosul/', admin.site.urls),
-    # path('criar-user-rh', criar_user_rh, name='criar_user_rh'),
+    path('criar-user-rh', criar_user_rh, name='criar_user_rh'),
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls')),
 ]

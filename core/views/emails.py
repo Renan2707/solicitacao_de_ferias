@@ -21,7 +21,7 @@ def email_nova_solicitacao(solicitacao):
         subject='Pedido de Férias',
         body=corpo_html,  # HTML direto como conteúdo principal
         from_email='sistema@macrosul.com',
-        to=['renan.silveira@macrosul.com'],
+        to=['rh@macrosul.com'],
         cc=[solicitacao.email_gestor],  # cópia, opcional
     )
 
@@ -80,7 +80,7 @@ def email_vencimento_proximo(card):
         subject='Vencimento de Férias Próximo',
         body=corpo_html_rh,
         from_email='sistema@macrosul.com',
-        to=['renan.silveira@macrosul.com'],
+        to=['rh@macrosul.com'],
     )
 
     email_rh.content_subtype = "html"
