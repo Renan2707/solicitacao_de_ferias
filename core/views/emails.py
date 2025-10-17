@@ -50,8 +50,10 @@ def email_solicitacao_reprovada(solicitacao):
 
 #EMAIL PARA O COLABORAOR AVISANDO QUE A SOLICITAÇÃO DELE FOI APROVADA
 def email_solicitacao_aprovada(solicitacao):
+    inicio_descanso = solicitacao.inicio_do_descanso.strftime("%d/%m/%Y")
+    fim_descanso = solicitacao.fim_do_descanso.strftime("%d/%m/%Y")
     corpo_html = (
-        f'Olá {solicitacao.user}, sua solicitação de férias no período de {solicitacao.inicio_do_descanso} até {solicitacao.fim_do_descanso} foi aprovada! '
+        f'Olá {solicitacao.user}, sua solicitação de férias no período de {inicio_descanso} até {fim_descanso} foi aprovada! '
         'Aproveite bem suas férias, bom descanso!'
         f'{assinatura_html}'
     )
@@ -69,8 +71,10 @@ def email_solicitacao_aprovada(solicitacao):
 
 #EMAIL PARA O COLABORAOR E PARA O RH AVISANDO QUE AS FÉRIAS ESTÃO PRÓXIMAS DO VENCIMENTO
 def email_vencimento_proximo(card):
+    vencimento_das_ferias = card.data_de_vencimento_de_ferias.strftime("%d/%m/%Y")
+
     corpo_html_rh = (
-        f'Atenção, o(a) colaborador(a) {card.colaborador} está com as férias próximas do vencimento ({card.data_de_vencimento_de_ferias}) '
+        f'Atenção, o(a) colaborador(a) {card.colaborador} está com as férias próximas do vencimento ({vencimento_das_ferias}) '
         f'e ainda possui um saldo de férias de: {card.saldo_de_ferias}. '
         'Por favor, entre em contato para regularizar a situação o mais rápido possível.'
         f'{assinatura_html}'
@@ -87,7 +91,7 @@ def email_vencimento_proximo(card):
     email_rh.send()
 
     corpo_html_colaborador = (
-        f'Atenção {card.colaborador}, suas férias estão próximas do vencimento ({card.data_de_vencimento_de_ferias}) '
+        f'Atenção {card.colaborador}, suas férias estão próximas do vencimento ({vencimento_das_ferias}) '
         f'e você ainda possui um saldo de férias de: {card.saldo_de_ferias}. '
         'Por favor, crie uma solicitação de férias em <a href="https://ferias.macrosul.com/">https://ferias.macrosul.com/</a> ou entre em contato com o RH para regularizar a situação o mais rápido possível.'
         f'{assinatura_html}'
